@@ -15,14 +15,14 @@ export default function AudioRecord () {
 
     mediaRecorder.ondataavailable = function(e) {
         console.log(e)
-        //console.log(mediaRecorder.requestData())
+        
         chunks.push(e.data);
-        //setChunks(chunks);
+        
         
     };
 
     mediaRecorder.onstop = function(e) {
-        //console.log(mediaRecorder.requestData())
+        
         let blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
         setSourcePlay(window.URL.createObjectURL(blob));
         console.log(blob)
