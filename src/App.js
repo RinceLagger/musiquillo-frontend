@@ -1,12 +1,21 @@
 import './App.css';
+import { Link, Redirect, Switch, Route } from "react-router-dom";
 
-import AudioRecord from './components/AudioRecord/AudioRecord';
+import SendAudio from './components/views/SendAudio';
 
 function App() {
   return (
     <div className="App">
 
-      <AudioRecord/>
+
+      <Switch>
+      <Route exact path="/">
+        <SendAudio/>
+
+      </Route>
+
+
+      </Switch>
      
     </div>
   );
