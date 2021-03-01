@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function AudioRecord() {
-  const [source, setSource] = React.useState(null);
-  const [sourcePlay, setSourcePlay] = React.useState(null);
+export default function AudioRecord({setSourcePlay}) {
+  //const [source, setSource] = React.useState(null);
+  //const [sourcePlay, setSourcePlay] = React.useState(null);
   //const [chunks, setChunks] = React.useState([]);
   const [mediaRecorder, setmediaRecorder] = React.useState({});
 
@@ -30,7 +30,7 @@ export default function AudioRecord() {
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then(function (mediaStreamObj) {
-        setSource(mediaStreamObj);
+        //setSource(mediaStreamObj);
 
         setmediaRecorder(new MediaRecorder(mediaStreamObj));
       });
@@ -67,12 +67,12 @@ export default function AudioRecord() {
             <button id="stop" onClick = {stopRecord}>Stop Playing</button> */}
 
       {/* <audio src={source} id="record" className = "audio-controls" controls></audio> */}
-      <audio
+      {/* <audio
         src={sourcePlay}
         id="play"
         className="audio-controls"
         controls
-      ></audio>
+      ></audio> */}
     </div>
   );
 }

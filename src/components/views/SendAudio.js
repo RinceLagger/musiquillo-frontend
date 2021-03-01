@@ -7,6 +7,9 @@ const ENDPOINT = "http://localhost:4000/";
 export default function SendAudio() {
   const [response, setResponse] = React.useState("");
   const [socket, setSocket] = React.useState(null);
+  const [blob, setBlob] = React.useState(null);
+  const [sourcePlay, setSourcePlay] = React.useState(null);
+  const [roomId, setRoomId] = React.useState("");
 
   if (socket) {
     socket.on("joinedRoom", (data) => {
@@ -14,6 +17,10 @@ export default function SendAudio() {
       const res = data.msg  
       setResponse(res);
     });
+    socket.on("newAudio", ({sourcePlay}) => {
+
+        setBlob(sourcePlay);
+      });
   }
 
   React.useEffect(() => {
@@ -29,15 +36,32 @@ export default function SendAudio() {
     
   }, []);
 
+  React.useEffect(() => {
+    if(sourcePlay){
+        socket.emit("newAudio", {sourcePlay, roomId});
+
+    }
+
+  }, [sourcePlay, roomId]);
+
   const sendRoomId = (roomId) => {
     socket.emit("join", {roomId});
+    setRoomId(roomId);
   };
 
   return (
     <div>
-      <AudioRecord />
+      <AudioRecord setSourcePlay={setSourcePlay}/>
       <p>{response}</p>
       <InputForm submitAction = {sendRoomId}/>
+
+      {blob?<audio
+        src={blob}
+        id="play"
+        className="audio-controls"
+        controls
+      ></audio>: <div></div> }
+      
     </div>
   );
 }
