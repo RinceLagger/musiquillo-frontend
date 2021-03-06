@@ -1,70 +1,174 @@
-# Getting Started with Create React App
+# MUSIQUILLO!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+## What is Musiquillo?
 
-In the project directory, you can run:
+Musiquillo is an online game that will test not only your singing skills but also your ability to guess songs. Play online with your friends and have fun singing your favourite songs.
 
-### `npm start`
+Each turn one player will have to hum a well-known song and the rest will have a limited time to figure it out. You will score points the more people figure out your song and also by figuring out other people's songs.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## User Stories
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+-  **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
+-  **SignUp / SignIn / Logout** 
+-  **Create a new game:** The player will be able to create a new game and share the code of that game with his friends so that they can join and play together.
+-  **Join a game:** Enter a code from a game created by a friend to join and play with him.
+-  **Record/send Audio:** Each turn, one player will have to record his voice humming the indicated song and send this audio to the other players.
+-  **Guess the song:** The other players will have to guess the song in a limited time.
+-  **View User profile** As a user I can see my profile
+-  **Edit User profile** As a user I can edit my profile
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Backlog
+- delete user profile
+- authentication with google
+- have your friends in favourites and be able to send them private messages
+- see ranking
+- improve styles, UI
+- ...
 
-### `npm run build`
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Client / Frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## React Router Routes (React App)
+| Path                      | Component            | Permissions                 | Behavior                                                     |
+| ------------------------- | -------------------- | --------------------------- | ------------------------------------------------------------ |
+| `/`                       | HomePage             | public `<Route>`            | Home page                                                    |
+| `/signup`                 | SignupPage           | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup |
+| `/login`                  | LoginPage            | anon only `<AnonRoute>`     | Login form, link to signup, navigate to homepage after login |
+| `/profile`               | ProfilePage     | user only `<PrivateRoute>`  | Page that shows the private profile of the user |
+| `/room-menu`               | RoomMenu     | user only `<PrivateRoute>`  | Page that shows the menu to create a game or join a game                |
+| `/singer`           | SingerPage      | user only `<PrivateRoute>`  | Page where the user can record audio and send it to the other players  |
+| `/listener`           | ListenerPage    | user only `<PrivateRoute>`  | Page where users wait to receive an audio and have to guess the song |
+| `/results`                | ResultsPage          | user only  `<PrivateRoute>` | Page where the results are displayed after each round of play  |
+| `/final-results`                | FinalResultsPage          | user only  `<PrivateRoute>` | Page where the final results are displayed  |                                          
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Components
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- HomePage
+ 
+- LoginPage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- SignupPage
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- ProfilePage  
+  * UserCard
+  * UploadPicture
 
-## Learn More
+- RoomMenu
+ * Header
+ * CreateRoomButton
+ * JoinRoomButton
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- SingerPage
+  * PlayerList
+  * SongSection
+  * TimerBar
+  * AudioRecord
+  * AudioPlay
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ListenerPage
+  * PlayerList
+  * SongSection
+  * TimerBar
+  * AudioPlay
+  * InputForm
+  
+- Routes
+  * AnonRoute
+  * PrivateRoute
 
-### Code Splitting
+- ResultsPage
+  * SongSection
+  * PointsList
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- FinalResultsPage
+  * WinnerSection
+ 
+  
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Services
 
-### Making a Progressive Web App
+- Auth Service
+  - authApi.login(user)
+  - authApi.signup(user)
+  - authApi.logout()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+...
+  
 
-### Advanced Configuration
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+# Server / Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+## Models
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+User model
+
+```javascript
+{
+  username: {type: String, required: true },
+  email: {type: String, required: true, unique: true},
+  hashedPassword: {type: String, required: true},
+  games: [{ type: mongoose.Schema.Types.ObjectId, ref: "Room" }],
+}
+```
+
+Room model
+
+```javascript
+{
+  roomId: { type: Number, require: true, unique: true},
+  users: [{ username: { type: String, unique: true }, points: { type: Number, default: 0 } } ],
+  turn: { type: Number, default: 0 },
+  status: { type: String, enum: ["start","playing", "finished"], default: "start" },
+},
+```
+
+
+Song model
+
+```javascript
+{
+  name: String,
+  hiddenName: String,
+},
+```
+
+
+<br>
+
+
+## API Endpoints (backend routes)
+
+| HTTP Method | URL                         | Request Body                 | Success status | Error Status | Description                                                  |
+| ----------- | --------------------------- | ---------------------------- | -------------- | ------------ | ------------------------------------------------------------ |
+| POST        | `/auth/signup`                | {username, email, password}      | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
+| POST        | `/auth/login`                 | {email, password}         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
+| POST        | `/auth/logout`                | (empty)                      | 204            | 400          | Logs out the user                                            |
+
+...
+
+
+
+<br>
+
+
+## Links
+
+
+### Trello/Kanban
+
+
+### Git
+
+
+### Slides
+

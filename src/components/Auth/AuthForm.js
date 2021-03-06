@@ -1,11 +1,13 @@
 import React from "react";
 
+const initialState = {
+  username: "",
+  email: "",
+  password: "",
+}
+
 function AuthForm({ btnText, onSubmit, signUp }) {
-  const [state, setState] = React.useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [state, setState] = React.useState(initialState);
 
   const handleChange = ({ target }) => {
     setState({ ...state, [target.name]: target.value });
@@ -13,7 +15,9 @@ function AuthForm({ btnText, onSubmit, signUp }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     onSubmit(state);
+    setState(initialState)
   };
 
   return (
