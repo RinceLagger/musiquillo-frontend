@@ -1,6 +1,7 @@
 import React from "react";
 import socketIOClient from "socket.io-client";
 import { useSocket } from "../../context/SocketContext";
+import { useAuth } from "../../context/AuthContext.utils";
 const ENDPOINT = "http://localhost:4000/";
 
 function getRandom(){
@@ -12,6 +13,14 @@ export default function NewRoom(){
     const [codigo, setCodigo] = React.useState("");
     
     const {socket, newRoom} = useSocket();
+    const { user} = useAuth();
+
+    if(socket){
+        socket.on("players", ({players}) => {
+
+            console.log(players);
+          });
+    }
    
     //console.log(useSocket)
 
@@ -27,7 +36,8 @@ export default function NewRoom(){
         if(codigo){
             const socket = socketIOClient(ENDPOINT);
             newRoom(socket);
-
+            const username = user.username;
+            socket.emit("join", { username, roomId: codigo})
         }
 
     },[codigo])
