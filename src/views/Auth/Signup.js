@@ -1,29 +1,17 @@
 import React from "react";
 import AuthForm from "../../components/Auth/AuthForm";
-import { signup } from "../../service/auth.service";
-import { useAuth } from "../../context/AuthContext";
+//import { signup } from "../../service/auth.service";
+import { useAuth } from "../../context/AuthContext.utils";
 import { Redirect } from "react-router-dom";
 
 function Signup() {
 
-  const { user, setUser } = useAuth();
-  
-  const handleSignup = async (user) => {
-    try {
-      const {data} = await signup(user);
-      console.log(data);
-      sessionStorage.setItem("user", JSON.stringify(data));
-      setUser(data);
-      
-    } catch (e) {
-      console.log(e);
-      if (e.response) {
-        console.error(e.response.data.message);
-      }
-    }
-  };
+  const { user, handleSignup } = useAuth();
 
-  if (user.username) {
+
+  //console.log("en login",user);
+  if (user.isLogged) {
+    console.log("redirect")
     return <Redirect to="/room-menu" />;
   }
 
