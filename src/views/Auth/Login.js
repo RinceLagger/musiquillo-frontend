@@ -14,7 +14,7 @@ function Login() {
       console.log(data);
       sessionStorage.setItem("user", JSON.stringify(data));
       setUser(data);
-      
+
     } catch (e) {
       console.log(e);
       if (e.response) {
@@ -23,7 +23,7 @@ function Login() {
     }
   };
 
-  if (user.username) {
+  if (user) {
     return <Redirect to="/room-menu" />;
   }
 
