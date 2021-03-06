@@ -11,7 +11,7 @@ function Login() {
   const handleLogin = async (user) => {
     try {
       const { data } = await login(user);
-      console.log(data);
+      
       sessionStorage.setItem("user", JSON.stringify(data));
       setUser(data);
 
@@ -22,8 +22,9 @@ function Login() {
       }
     }
   };
-
+  console.log("en login",user);
   if (user) {
+    console.log("redirect")
     return <Redirect to="/room-menu" />;
   }
 
