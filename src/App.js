@@ -6,6 +6,7 @@ import Signup from "./views/Auth/Signup";
 import PrivateRoute from "./Routes/PrivateRoute";
 import RoomMenu from "./views/RoomMenu/RoomMenu";
 import AnonRoute from "./Routes/AnonRoute";
+import NewRoom from "./views/NewRoom/NewRoom";
 
 //import SendAudio from './components/views/SendAudio';
 
@@ -16,6 +17,7 @@ function App() {
         <AnonRoute exact path="/login" component ={Login}  />
         <AnonRoute exact path="/signup" component ={Signup}  />
         <PrivateRoute exact path="/room-menu" component ={RoomMenu}  />
+        <PrivateRoute exact path="/newRoom" component ={NewRoom}  />
         <Route exact path="/">
           <Home />
         </Route>

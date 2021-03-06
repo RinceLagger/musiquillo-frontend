@@ -1,14 +1,19 @@
 import React from "react";
 
-const SocketContext = React.createContext();
+const SocketContext = React.createContext({});
 
 
 
 function SocketProvider({ children }) {
     const [socket, setSocket] = React.useState(null);
 
+    const newRoom = (newsocket) =>{
+        setSocket(newsocket);
+    }
+
+
   return (
-    <SocketContext.Provider value={{ socket, setSocket }}>
+    <SocketContext.Provider value={{ socket, newRoom }}>
       {children}
     </SocketContext.Provider>
   );
@@ -16,4 +21,6 @@ function SocketProvider({ children }) {
 
 export default SocketProvider;
 
-export const useSocket = () => React.useContext(SocketContext);
+export function useSocket() {
+    return React.useContext(SocketContext);
+  }
