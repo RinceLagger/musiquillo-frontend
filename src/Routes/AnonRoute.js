@@ -6,7 +6,7 @@ function AnonRoute({ component: Component, exact, path, ...props }) {
   const { user } = useAuth();
   
   if (user.isLogged) {
-    console.log("ya logueado")
+   // console.log("ya logueado")
     return <Redirect to="/room-menu" />;
   }
 

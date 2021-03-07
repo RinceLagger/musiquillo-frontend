@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import AuthProvider from "./context/AuthContext";
+import PlayersProvider from "./context/PlayersContext";
 import SocketProvider from "./context/SocketContext";
 
 ReactDOM.render(
@@ -12,7 +13,9 @@ ReactDOM.render(
     <Router>
       <AuthProvider>
         <SocketProvider>
-          <App />
+          <PlayersProvider>
+            <App />
+          </PlayersProvider>
         </SocketProvider>
       </AuthProvider>
     </Router>
