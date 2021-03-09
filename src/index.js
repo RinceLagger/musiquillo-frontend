@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import AuthProvider from "./context/AuthContext";
 import PlayersProvider from "./context/PlayersContext";
 import SocketProvider from "./context/SocketContext";
+import TurnProvider from "./context/TurnContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +15,9 @@ ReactDOM.render(
       <AuthProvider>
         <SocketProvider>
           <PlayersProvider>
-            <App />
+            <TurnProvider>
+              <App />
+            </TurnProvider>
           </PlayersProvider>
         </SocketProvider>
       </AuthProvider>

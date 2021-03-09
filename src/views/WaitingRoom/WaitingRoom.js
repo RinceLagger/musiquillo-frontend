@@ -3,8 +3,8 @@ import React from "react";
 import { useSocket } from "../../context/SocketContext";
 import { usePlayers } from "../../context/PlayersContext";
 import { useAuth } from "../../context/AuthContext.utils";
-
-
+import { useTurn } from "../../context/TurnContext";
+import { useHistory } from "react-router-dom";
 
 function WaitingRoom(){
 

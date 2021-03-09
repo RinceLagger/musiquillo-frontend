@@ -8,6 +8,7 @@ import { useSocket } from "../../context/SocketContext";
 import { usePlayers } from "../../context/PlayersContext";
 import { useAuth } from "../../context/AuthContext.utils";
 import { useHistory } from "react-router-dom";
+import { useTurn } from "../../context/TurnContext";
 const ENDPOINT = "http://localhost:4000/";
 
 function JoinRoom() {
@@ -16,7 +17,9 @@ function JoinRoom() {
     const {socket, newRoom} = useSocket();
     const { user} = useAuth();
     const {players, newPlayer} = usePlayers();
-    console.log(newRoom)
+    const { turn, nextTurn  } = useTurn();
+
+    
 
     if(socket){
         socket.on("players", ({players}) => {
@@ -28,6 +31,13 @@ function JoinRoom() {
           socket.on("wrongCode", () => {
 
             console.log("wrongCode");
+          });
+
+          socket.on("start", ({turn}) => {
+            console.log("start");
+            nextTurn(turn);
+            console.log("turno: ", turn);
+            history.push("/game-room");
           });
     }
 
