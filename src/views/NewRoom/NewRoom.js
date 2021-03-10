@@ -5,6 +5,7 @@ import { useAuth } from "../../context/AuthContext.utils";
 import { usePlayers } from "../../context/PlayersContext";
 import { useTurn } from "../../context/TurnContext";
 import { useHistory } from "react-router-dom";
+import { useCode } from "../../context/CodeContext";
 const ENDPOINT = "http://localhost:4000/";
 
 function getRandom() {
@@ -12,11 +13,12 @@ function getRandom() {
 }
 
 export default function NewRoom() {
-  const [codigo, setCodigo] = React.useState("");
+  //const [codigo, setCodigo] = React.useState("");
   const { players, newPlayer } = usePlayers();
   const { socket, newRoom } = useSocket();
   const { user } = useAuth();
   const { turn, nextTurn  } = useTurn();
+  const { code, defineCode  } = useCode();
 
   let history = useHistory();
   if (socket) {
@@ -39,28 +41,28 @@ export default function NewRoom() {
 
   const handleClick = (event) => {
     const username = user.username;
-    socket.emit("start", { username, roomId: codigo });
+    socket.emit("start", { username, roomId: code });
   }
   
 
   React.useEffect(() => {
     const random = getRandom();
-    setCodigo(random);
+    defineCode(random);
   }, []);
 
   React.useEffect(() => {
-    if (codigo) {
+    if (code) {
       const socket = socketIOClient(ENDPOINT);
       newRoom(socket);
       const username = user.username;
-      socket.emit("join", { username, roomId: codigo });
+      socket.emit("join", { username, roomId: code });
     }
-  }, [codigo]);
+  }, [code]);
 
   return (
     <div>
       <p>
-        Copia y comparte el código! <span>{codigo}</span>
+        Copia y comparte el código! <span>{code}</span>
       </p>
       <h1>Connected Players:</h1>
       <ul>

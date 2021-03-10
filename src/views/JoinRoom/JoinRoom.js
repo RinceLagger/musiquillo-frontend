@@ -9,6 +9,7 @@ import { usePlayers } from "../../context/PlayersContext";
 import { useAuth } from "../../context/AuthContext.utils";
 import { useHistory } from "react-router-dom";
 import { useTurn } from "../../context/TurnContext";
+import { useCode } from "../../context/CodeContext";
 const ENDPOINT = "http://localhost:4000/";
 
 function JoinRoom() {
@@ -18,6 +19,7 @@ function JoinRoom() {
     const { user} = useAuth();
     const {players, newPlayer} = usePlayers();
     const { turn, nextTurn  } = useTurn();
+    const { code, defineCode  } = useCode();
 
     
 
@@ -45,7 +47,8 @@ function JoinRoom() {
         const socket = socketIOClient(ENDPOINT);
         newRoom(socket);
         const username = user.username;
-        socket.emit("join", { username, roomId: codigo})
+        socket.emit("join", { username, roomId: codigo});
+        defineCode(codigo);
 
       };
 

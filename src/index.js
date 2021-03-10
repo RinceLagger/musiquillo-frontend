@@ -8,6 +8,7 @@ import AuthProvider from "./context/AuthContext";
 import PlayersProvider from "./context/PlayersContext";
 import SocketProvider from "./context/SocketContext";
 import TurnProvider from "./context/TurnContext";
+import CodeProvider from "./context/CodeContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,9 +16,11 @@ ReactDOM.render(
       <AuthProvider>
         <SocketProvider>
           <PlayersProvider>
-            <TurnProvider>
-              <App />
-            </TurnProvider>
+            <CodeProvider>
+              <TurnProvider>
+                <App />
+              </TurnProvider>
+            </CodeProvider>
           </PlayersProvider>
         </SocketProvider>
       </AuthProvider>
