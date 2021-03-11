@@ -10,6 +10,7 @@ import { useAuth } from "../../context/AuthContext.utils";
 import { useHistory } from "react-router-dom";
 import { useTurn } from "../../context/TurnContext";
 import { useCode } from "../../context/CodeContext";
+import { useSongs } from "../../context/SongContext";
 const ENDPOINT = "http://localhost:4000/";
 
 function JoinRoom() {
@@ -20,6 +21,7 @@ function JoinRoom() {
     const {players, newPlayer} = usePlayers();
     const { turn, nextTurn  } = useTurn();
     const { code, defineCode  } = useCode();
+    const { songs, defineSongs  } = useSongs();
 
     
 
@@ -35,9 +37,10 @@ function JoinRoom() {
             console.log("wrongCode");
           });
 
-          socket.on("start", ({turn}) => {
+          socket.on("start", ({turn, songs}) => {
             console.log("start");
             nextTurn(turn);
+            defineSongs(songs);
             console.log("turno: ", turn);
             history.push("/game-room");
           });

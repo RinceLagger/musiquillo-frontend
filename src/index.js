@@ -9,6 +9,7 @@ import PlayersProvider from "./context/PlayersContext";
 import SocketProvider from "./context/SocketContext";
 import TurnProvider from "./context/TurnContext";
 import CodeProvider from "./context/CodeContext";
+import SongProvider from "./context/SongContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +19,9 @@ ReactDOM.render(
           <PlayersProvider>
             <CodeProvider>
               <TurnProvider>
-                <App />
+                <SongProvider>
+                  <App />
+                </SongProvider>
               </TurnProvider>
             </CodeProvider>
           </PlayersProvider>
