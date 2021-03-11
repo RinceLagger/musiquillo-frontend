@@ -5,6 +5,8 @@ import { usePlayers } from "../../context/PlayersContext";
 import { useTurn } from "../../context/TurnContext";
 import { useCode } from "../../context/CodeContext";
 import AudioRecord from "../../components/AudioRecord/AudioRecord";
+import AudioPlay from "../../components/AudioPlay/AudioPlay";
+import GenericForm from "../../components/GenericForm/GenericForm";
 import { useSongs } from "../../context/SongContext";
 
 export default function GameRoom() {
@@ -16,23 +18,26 @@ export default function GameRoom() {
   const { code, defineCode } = useCode();
   const [sourcePlay, setSourcePlay] = React.useState(null);
   const [showSend, setShowSend] = React.useState(true);
-  const { songs, setSongs  } = useSongs();
+  const { songs, setSongs } = useSongs();
 
 
-  const sendAudio = () =>{
-    socket.emit("newAudio", {sourcePlay, roomId: code});
+  const checkGuess = (guess) => {
+    if(guess.toLowerCase()===songs[turn].name.toLowerCase()){
+      console.log("has acertado!")
+    }
+
+  };
+
+  const sendAudio = () => {
+    socket.emit("newAudio", { sourcePlay, roomId: code });
     setShowSend(false);
+  };
+
+  if (socket) {
+    socket.on("newAudio", ({ sourcePlay }) => {
+      setBlob(sourcePlay);
+    });
   }
-
-
-
-  if(socket){
-    socket.on("newAudio", ({sourcePlay}) => {
-        setBlob(sourcePlay);
-      });
-
-    
-}
 
   if (players[turn].username === user.username) {
     return (
@@ -40,23 +45,15 @@ export default function GameRoom() {
         <h1>Record and Send!</h1>
         {console.log(songs)}
         <h2>Hum the song: {songs[turn].name}</h2>
-        <AudioRecord setSourcePlay={setSourcePlay}/>
+        <AudioRecord setSourcePlay={setSourcePlay} />
 
-        {sourcePlay ? (
-            <div><audio
-            src={sourcePlay}
-            id="play"
-            className="audio-controls"
-            controls
-          ></audio>
-          {showSend && <button onClick={sendAudio}>Send Audio!</button>}
-          
+        {sourcePlay && (
+          <div>
+            <AudioPlay source={sourcePlay} />
+            {showSend && <button onClick={sendAudio}>Send Audio!</button>}
+            
           </div>
-          
-        ) : (
-          <div></div>
         )}
-
       </div>
     );
   } else {
@@ -65,18 +62,8 @@ export default function GameRoom() {
         <h1>pantalla listener</h1>
         <h2>Guess the song: {songs[turn].hiddenName}</h2>
 
-
-
-        {blob ? (
-          <audio
-            src={blob}
-            id="play"
-            className="audio-controls"
-            controls
-          ></audio>
-        ) : (
-          <div></div>
-        )}
+        {blob? <AudioPlay source={blob}/> : <h3>Waiting for the singer</h3>}
+        <GenericForm text= {"Try to guess the song"} btnTxt= {"Guess!"} submitAction= {checkGuess}/>
       </div>
     );
   }
