@@ -4,7 +4,7 @@ const initialState = {
   input: "",
 };
 
-function GenericForm({ text,btnTxt, submitAction }) {
+function GenericForm({ text,btnTxt,buttonEnable, submitAction }) {
   const [formState, setFormState] = React.useState(initialState);
 
   const handleChange = ({ target }) => {
@@ -17,6 +17,7 @@ function GenericForm({ text,btnTxt, submitAction }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     submitAction(formState.input);
+    setFormState(initialState);
   };
 
   return (
@@ -33,7 +34,7 @@ function GenericForm({ text,btnTxt, submitAction }) {
           onChange={handleChange}
         />
 
-        <button type="submit">{btnTxt}</button>
+        <button type="submit" disabled={buttonEnable}>{btnTxt}</button>
       </form>
     </div>
   );
