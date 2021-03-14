@@ -9,6 +9,7 @@ import AudioPlay from "../../components/AudioPlay/AudioPlay";
 import GenericForm from "../../components/GenericForm/GenericForm";
 import { useSongs } from "../../context/SongContext";
 import TimeBar from "../../components/TImeBar/TimeBar"
+import PlayersPoints from "../../components/PlayersPoints/PlayersPoints"
 
 export default function GameRoom() {
   const { players, newPlayer } = usePlayers();
@@ -21,7 +22,7 @@ export default function GameRoom() {
   const [showSend, setShowSend] = React.useState(true);
   const { songs, setSongs } = useSongs();
   const [enable, setEnable] = React.useState(false);
- 
+  const [showTimeBar, setshowTimeBar] = React.useState(false);
 
   const isSinger = ()=> players[turn].username === user.username;
   
@@ -32,7 +33,7 @@ export default function GameRoom() {
     if(guess.toLowerCase()===songs[turn].name.toLowerCase()){
       const username = user.username;
       setEnable(true);
-      console.log("has acertado")
+      //console.log("has acertado")
       socket.emit("point", { username, roomId: code });
     }
 
@@ -46,16 +47,22 @@ export default function GameRoom() {
   if (socket) {
     socket.on("newAudio", ({ sourcePlay }) => {
       setBlob(sourcePlay);
+      setshowTimeBar(true);
     });
     socket.on("timeOver", () => {
       console.log("timeOver")
+    });
+    socket.on("updatePoints", ({ players }) => {
+      newPlayer(players);
+      console.log(players);
     });
   }
 
   if (isSinger()) {
     return (
       <div>
-       <TimeBar/>
+      <PlayersPoints/>
+       {showTimeBar && <TimeBar/>}
         <h1>Record and Send!</h1>
         {console.log(songs)}
         <h2>Hum the song: {songs[turn].name}</h2>
@@ -73,7 +80,8 @@ export default function GameRoom() {
   } else {
     return (
       <div>
-      <TimeBar/>
+      <PlayersPoints/>
+      {showTimeBar && <TimeBar/>}
         <h1>pantalla listener</h1>
         <h2>Guess the song: {songs[turn].hiddenName}</h2>
 
