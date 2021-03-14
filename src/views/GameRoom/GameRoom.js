@@ -27,7 +27,9 @@ export default function GameRoom() {
   const [flipSong, setflipSong] = React.useState(false);
   let history = useHistory();
 
-  const isSinger = ()=> players[turn].username === user.username;
+  const isSinger = ()=> {
+     return players[turn].username === user.username;
+    }
   
 
   const checkGuess = (guess) => {
