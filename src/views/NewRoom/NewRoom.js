@@ -38,6 +38,9 @@ export default function NewRoom() {
         nextTurn(turn);
         defineSongs(songs);
         console.log("turno: ", turn);
+        socket.off('players');
+        socket.off('start');
+        socket.off('duplicatedRoom');
         history.push("/game-room");
       });
   }

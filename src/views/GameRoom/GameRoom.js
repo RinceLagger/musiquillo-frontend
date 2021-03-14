@@ -10,6 +10,7 @@ import GenericForm from "../../components/GenericForm/GenericForm";
 import { useSongs } from "../../context/SongContext";
 import TimeBar from "../../components/TImeBar/TimeBar"
 import PlayersPoints from "../../components/PlayersPoints/PlayersPoints"
+import { useHistory } from "react-router-dom";
 
 export default function GameRoom() {
   const { players, newPlayer } = usePlayers();
@@ -23,6 +24,8 @@ export default function GameRoom() {
   const { songs, setSongs } = useSongs();
   const [enable, setEnable] = React.useState(false);
   const [showTimeBar, setshowTimeBar] = React.useState(false);
+  const [flipSong, setflipSong] = React.useState(false);
+  let history = useHistory();
 
   const isSinger = ()=> players[turn].username === user.username;
   
@@ -30,10 +33,10 @@ export default function GameRoom() {
   const checkGuess = (guess) => {
 
    
-    if(guess.toLowerCase()===songs[turn].name.toLowerCase()){
+    if(guess.toLowerCase()===songs[turn].name.toLowerCase()){ //ACIERTO!!!
       const username = user.username;
-      setEnable(true);
-      //console.log("has acertado")
+      setEnable(true); //no puedes escribir más ya que has acertado
+      setflipSong(true); //muestra canción
       socket.emit("point", { username, roomId: code });
     }
 
@@ -51,6 +54,10 @@ export default function GameRoom() {
     });
     socket.on("timeOver", () => {
       console.log("timeOver")
+      socket.off('newAudio');
+      socket.off('updatePoints');
+      socket.off('timeOver');
+      history.push("/results-room");
     });
     socket.on("updatePoints", ({ players }) => {
       newPlayer(players);
@@ -61,11 +68,11 @@ export default function GameRoom() {
   if (isSinger()) {
     return (
       <div>
-      <PlayersPoints/>
+      <PlayersPoints classname = "ingame-points"/>
        {showTimeBar && <TimeBar/>}
         <h1>Record and Send!</h1>
         {console.log(songs)}
-        <h2>Hum the song: {songs[turn].name}</h2>
+        <h2>Hum the song: { songs[turn].name}</h2>
         <AudioRecord setSourcePlay={setSourcePlay} />
 
         {sourcePlay && (
@@ -80,10 +87,10 @@ export default function GameRoom() {
   } else {
     return (
       <div>
-      <PlayersPoints/>
+      <PlayersPoints classname = "ingame-points"/>
       {showTimeBar && <TimeBar/>}
         <h1>pantalla listener</h1>
-        <h2>Guess the song: {songs[turn].hiddenName}</h2>
+        <h2>Guess the song: {!flipSong? <span>{songs[turn].hiddenName}</span> : <span>{songs[turn].name}</span> }</h2>
 
         {blob? <AudioPlay source={blob}/> : <h3>Waiting for the singer</h3>}
         <GenericForm text= {"Try to guess the song"} btnTxt= {"Guess!"} buttonEnable = {enable} submitAction= {checkGuess}/>

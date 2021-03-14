@@ -28,6 +28,8 @@ function JoinRoom() {
     if(socket){
         socket.on("players", ({players}) => {
             newPlayer(players);
+            socket.off('players');
+            socket.off('wrongCode');
             history.push("/waiting-room");
             //console.log(players);
           });
@@ -37,13 +39,16 @@ function JoinRoom() {
             console.log("wrongCode");
           });
 
-          socket.on("start", ({turn, songs}) => {
-            console.log("start");
-            nextTurn(turn);
-            defineSongs(songs);
-            console.log("turno: ", turn);
-            history.push("/game-room");
-          });
+          // socket.on("start", ({turn, songs}) => {
+          //   console.log("start");
+          //   nextTurn(turn);
+          //   defineSongs(songs);
+          //   socket.off('players');
+          //   socket.off('wrongCode');
+          //   socket.off('start');
+          //   console.log("turno: ", turn);
+          //   history.push("/game-room");
+          // });
     }
 
     const enterCode = (codigo) => {
