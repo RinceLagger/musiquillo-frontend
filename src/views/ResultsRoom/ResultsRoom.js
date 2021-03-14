@@ -28,6 +28,11 @@ export default function ResultsRoom() {
             nextTurn(turno);
             history.push("/game-room");
           });
+          socket.on("showWinner", () => {
+            
+            
+            history.push("/winner-room");
+          });
 
     }
 

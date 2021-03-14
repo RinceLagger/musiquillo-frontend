@@ -11,6 +11,7 @@ import JoinRoom from "./views/JoinRoom/JoinRoom";
 import WaitingRoom from "./views/WaitingRoom/WaitingRoom";
 import GameRoom from "./views/GameRoom/GameRoom";
 import ResultsRoom from "./views/ResultsRoom/ResultsRoom";
+import WinnerRoom from "./views/WinnerRoom/WinnerRoom";
 //import SendAudio from './components/views/SendAudio';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <PrivateRoute exact path="/waiting-room" component ={WaitingRoom}  />
         <PrivateRoute exact path="/game-room" component ={GameRoom}  />
         <PrivateRoute exact path="/results-room" component ={ResultsRoom}  />
+        <PrivateRoute exact path="/winner-room" component ={WinnerRoom}  />
         <Route exact path="/">
           <Home />
         </Route>
