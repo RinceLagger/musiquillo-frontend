@@ -14,14 +14,14 @@ import { useHistory } from "react-router-dom";
 
 export default function GameRoom() {
   const { players, newPlayer } = usePlayers();
-  const { socket, newRoom } = useSocket();
+  const { socket } = useSocket();
   const { user } = useAuth();
-  const { turn, nextTurn } = useTurn();
+  const { turn } = useTurn();
   const [blob, setBlob] = React.useState(null);
-  const { code, defineCode } = useCode();
+  const { code } = useCode();
   const [sourcePlay, setSourcePlay] = React.useState(null);
   const [showSend, setShowSend] = React.useState(true);
-  const { songs, setSongs } = useSongs();
+  const { songs } = useSongs();
   const [enable, setEnable] = React.useState(false);
   const [showTimeBar, setshowTimeBar] = React.useState(false);
   const [flipSong, setflipSong] = React.useState(false);
