@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AudioRecord({setSourcePlay}) {
+export default function AudioRecord({setSourcePlay, setBlob}) {
   //const [source, setSource] = React.useState(null);
   //const [sourcePlay, setSourcePlay] = React.useState(null);
   //const [chunks, setChunks] = React.useState([]);
@@ -20,6 +20,9 @@ export default function AudioRecord({setSourcePlay}) {
 
   mediaRecorder.onstop = function (e) {
     let blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
+
+
+    setBlob(blob);
     setSourcePlay(window.URL.createObjectURL(blob));
     //console.log(blob);
   };
