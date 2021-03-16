@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useTurn } from "../../context/TurnContext";
 import { useCode } from "../../context/CodeContext";
 import { useSongs } from "../../context/SongContext";
-const ENDPOINT = "http://localhost:4000/";
+const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 function JoinRoom() {
 

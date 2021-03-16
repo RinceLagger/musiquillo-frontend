@@ -7,7 +7,7 @@ import { useTurn } from "../../context/TurnContext";
 import { useHistory } from "react-router-dom";
 import { useCode } from "../../context/CodeContext";
 import { useSongs } from "../../context/SongContext";
-const ENDPOINT = "http://localhost:4000/";
+const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 function getRandom() {
   return String(Math.floor(Math.random() * 100000));
