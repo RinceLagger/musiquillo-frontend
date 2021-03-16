@@ -18,9 +18,9 @@ export default function NewRoom() {
   const { players, newPlayer } = usePlayers();
   const { socket, newRoom } = useSocket();
   const { user } = useAuth();
-  const { turn, nextTurn  } = useTurn();
+  const {  nextTurn  } = useTurn();
   const { code, defineCode  } = useCode();
-  const { songs, defineSongs  } = useSongs();
+  const {  defineSongs  } = useSongs();
 
   let history = useHistory();
   if (socket) {
