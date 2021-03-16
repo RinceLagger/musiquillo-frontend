@@ -1,6 +1,6 @@
 import React from "react";
-import AudioRecord from "../AudioRecord/AudioRecord";
-import InputForm from "../InputForm/InputForm";
+import AudioRecord from "../../components/AudioRecord/AudioRecord";
+import InputForm from "../../components/InputForm/InputForm";
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://localhost:4000/";
 

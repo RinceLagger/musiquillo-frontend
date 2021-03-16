@@ -13,7 +13,7 @@ export default function AudioRecord({setSourcePlay}) {
   };
 
   mediaRecorder.ondataavailable = function (e) {
-    console.log(e);
+    //console.log(e);
 
     chunks.push(e.data);
   };
@@ -21,7 +21,7 @@ export default function AudioRecord({setSourcePlay}) {
   mediaRecorder.onstop = function (e) {
     let blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
     setSourcePlay(window.URL.createObjectURL(blob));
-    console.log(blob);
+    //console.log(blob);
   };
 
   React.useEffect(() => {
@@ -56,7 +56,7 @@ export default function AudioRecord({setSourcePlay}) {
 
   return (
     <div>
-      {console.log(mediaRecorder)}
+      {/* {console.log(mediaRecorder)} */}
       <button id="start-record" onClick={startRecord}>
         Start Recording
       </button>

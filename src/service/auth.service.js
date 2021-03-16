@@ -1,0 +1,12 @@
+import axios from "axios";
+
+const authApi = axios.create({
+  baseURL: process.env.REACT_APP_ENDPOINT,
+  withCredentials: true,
+});
+
+export const login = (user) => authApi.post("/login", user);
+
+export const signup = (user) => authApi.post("/signup", user);
+
+export const logout = () => authApi.post("/logout");

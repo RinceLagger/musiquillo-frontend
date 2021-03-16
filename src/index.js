@@ -4,11 +4,29 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
+import AuthProvider from "./context/AuthContext";
+import PlayersProvider from "./context/PlayersContext";
+import SocketProvider from "./context/SocketContext";
+import TurnProvider from "./context/TurnContext";
+import CodeProvider from "./context/CodeContext";
+import SongProvider from "./context/SongContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <AuthProvider>
+        <SocketProvider>
+          <PlayersProvider>
+            <CodeProvider>
+              <TurnProvider>
+                <SongProvider>
+                  <App />
+                </SongProvider>
+              </TurnProvider>
+            </CodeProvider>
+          </PlayersProvider>
+        </SocketProvider>
+      </AuthProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")
