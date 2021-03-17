@@ -46,6 +46,7 @@ export default function GameRoom() {
 
   const sendAudio = () => {
     socket.emit("newAudio", { blob, roomId: code });
+    console.log("emito blob", blob)
     setShowSend(false);
   };
 
