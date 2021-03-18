@@ -45,13 +45,17 @@ export default function GameRoom() {
   };
 
   const sendAudio = () => {
-    socket.emit("newAudio", { sourcePlay, roomId: code });
+    socket.emit("newAudio", { blob, roomId: code });
+    console.log("emito blob", blob)
     setShowSend(false);
   };
 
   if (socket) {
-    socket.on("newAudio", ({ sourcePlay }) => {
-      setBlob(sourcePlay);
+    socket.on("newAudio", ({ blob: newBlob }) => {
+      console.log(newBlob)
+      let blob = new Blob([newBlob], { type: "audio/ogg; codecs=opus" })
+      const src = window.URL.createObjectURL(blob);
+      setBlob(src);
       setshowTimeBar(true);
     });
     socket.on("timeOver", () => {
@@ -75,7 +79,7 @@ export default function GameRoom() {
         <h1>Record and Send!</h1>
         {console.log(songs)}
         <h2>Hum the song: { songs[turn].name}</h2>
-        <AudioRecord setSourcePlay={setSourcePlay} />
+        <AudioRecord setSourcePlay={setSourcePlay} setBlob = {setBlob}/>
 
         {sourcePlay && (
           <div>

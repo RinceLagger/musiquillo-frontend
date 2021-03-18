@@ -1,10 +1,12 @@
 import React from "react";
 
+import "./AuthForm.css";
+
 const initialState = {
   username: "",
   email: "",
   password: "",
-}
+};
 
 function AuthForm({ btnText, onSubmit, signUp }) {
   const [state, setState] = React.useState(initialState);
@@ -17,42 +19,44 @@ function AuthForm({ btnText, onSubmit, signUp }) {
     e.preventDefault();
 
     onSubmit(state);
-    setState(initialState)
+    setState(initialState);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        username
-        <input
-          type="text"
-          name="username"
-          value={state.username}
-          onChange={handleChange}
-        />
-      </label>
+    <form className="container-secondary" onSubmit={handleSubmit}>
+      <label htmlFor="username">username</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        value={state.username}
+        onChange={handleChange}
+      />
+
       {signUp && (
-        <label>
-          email
+        <>
+          <label htmlFor="email">email</label>
           <input
             type="email"
             name="email"
+            id="email"
             value={state.email}
             onChange={handleChange}
           />
-        </label>
+        </>
       )}
 
-      <label>
-        password
-        <input
-          type="password"
-          name="password"
-          value={state.password}
-          onChange={handleChange}
-        />
-      </label>
-      <button>{btnText}</button>
+      <label htmlFor="password">password</label>
+
+      <input
+        type="password"
+        name="password"
+        id="password"
+        value={state.password}
+        onChange={handleChange}
+      />
+
+      <button className="primary">{btnText}</button>
     </form>
   );
 }

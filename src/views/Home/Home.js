@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div>
-      <h2>Home</h2>
-      <Link to="/signup">signup</Link>
-      <Link to="/login">login</Link>
-    </div>
+    
+      <div className="container-secondary">
+        <h1 className="title">MUSIQUILLO</h1>
+        <div>
+          <Link to="/signup"><button className = "primary">Sign In</button></Link>
+          <Link to="/login"><button className = "secondary">Log In</button></Link>
+        </div>
+      </div>
+    
   );
 }
 

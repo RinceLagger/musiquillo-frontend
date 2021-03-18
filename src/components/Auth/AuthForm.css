@@ -1,0 +1,17 @@
+form input {
+    margin: 10px 0;
+    height: 2em;
+    border: 1px solid #198FFD;
+    border-radius: 14px;
+    padding: 0.5em;
+    font-size: 14px;
+    
+  }
+  form label {
+   color: #198FFD;
+   align-self: flex-start;
+  }
+
+  form button{
+      align-self: center;
+  }

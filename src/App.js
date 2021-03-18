@@ -16,7 +16,7 @@ import WinnerRoom from "./views/WinnerRoom/WinnerRoom";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App container-home">
       <Switch>
         <AnonRoute exact path="/login" component ={Login}  />
         <AnonRoute exact path="/signup" component ={Signup}  />
