@@ -1,21 +1,33 @@
-.progress{
-    background:orange;
+
+
+.progressContainer {
+    position: absolute;
+    top:0px;
+    display: flex;
+    align-items: center;
+    
+    width:100%;
     height:30px;
+    background:#6EB9FF;
+}
+
+
+.progress{
+    background:#B4FF8E;
+    height:12px;
     line-height:30px;
     animation-name: bar-progress;
     animation-duration: 30s;
-    color: red
+    border-radius: 25px;
+    margin-left: 20px;
+    
+    
 }
 
-.progressContainer {
-    width:90%;
-    height:30px;
-    border: 1px solid black;
-    background:white;
-}
+
 
 @keyframes bar-progress {
-    0% {width:100%;}
+    0% {width:90%;}
     100% {width:0%;}
   }
   

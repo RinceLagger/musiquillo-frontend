@@ -48,7 +48,7 @@ export default function ResultsRoom() {
     return(
         <div>
             <h1>Ranking actual: </h1>
-            <PlayersPoints classname = "results-points"/>
+            <PlayersPoints styleName = {{playersStyle:"results-points"}}/>
         </div>
         
     )

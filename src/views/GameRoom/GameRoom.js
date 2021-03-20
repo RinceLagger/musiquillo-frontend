@@ -73,9 +73,12 @@ export default function GameRoom() {
 
   if (isSinger()) {
     return (
+      <>
+      {showTimeBar && <TimeBar/>}
+      <PlayersPoints styleName = {{playersStyle:"ingame-points"}}/>
       <div>
-      <PlayersPoints classname = "ingame-points"/>
-       {showTimeBar && <TimeBar/>}
+      
+       
         <h1>Record and Send!</h1>
         {console.log(songs)}
         <h2>Hum the song: { songs[turn].name}</h2>
@@ -89,18 +92,23 @@ export default function GameRoom() {
           </div>
         )}
       </div>
+      </>
     );
   } else {
     return (
-      <div>
-      <PlayersPoints classname = "ingame-points"/>
+      <>
       {showTimeBar && <TimeBar/>}
+      <PlayersPoints styleName = {{playersStyle:"ingame-points"}}/>
+      <div>
+      
+      
         <h1>pantalla listener</h1>
         <h2>Guess the song: {!flipSong? <span>{songs[turn].hiddenName}</span> : <span>{songs[turn].name}</span> }</h2>
 
         {blob? <AudioPlay source={blob}/> : <h3>Waiting for the singer</h3>}
         <GenericForm text= {"Try to guess the song"} btnTxt= {"Guess!"} buttonEnable = {enable} submitAction= {checkGuess}/>
       </div>
+      </>
     );
   }
 }
