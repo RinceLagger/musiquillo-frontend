@@ -11,6 +11,7 @@ import { useSongs } from "../../context/SongContext";
 import TimeBar from "../../components/TImeBar/TimeBar";
 import PlayersPoints from "../../components/PlayersPoints/PlayersPoints";
 import { useHistory } from "react-router-dom";
+import "./GameRoom.css"
 
 const initialSongStyle = {
   position: "absolute",
@@ -112,9 +113,9 @@ export default function GameRoom() {
           </h2>
         </div>
         {sourcePlay && (
-          <div>
+          <div className="play-container">
             <AudioPlay source={sourcePlay} />
-            {showSend && <button onClick={sendAudio}>Send Audio!</button>}
+            {showSend && <button className="primary" onClick={sendAudio}>Send!</button>}
           </div>
         )}
 
@@ -144,15 +145,16 @@ export default function GameRoom() {
             )}
           </h2>
         </div>
-        <div>
-          {blob ? <AudioPlay source={blob} /> : <h3>Waiting for the singer</h3>}
+        <div className="play-container">
+          {blob ? <AudioPlay  source={blob} /> : <h3>Waiting for the singer</h3>}
+          </div>
           <GenericForm
             text={"Try to guess the song"}
             btnTxt={"Guess!"}
             buttonEnable={enable}
             submitAction={checkGuess}
           />
-        </div>
+        
       </>
     );
   }
