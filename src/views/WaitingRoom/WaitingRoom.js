@@ -35,11 +35,14 @@ function WaitingRoom(){
 
 
     return(
-        <div>
-        <h1>Connected Players:</h1>
-        <ul>{players.map((player)=> <li key = {player._id}>{player.username}</li>)}
-        </ul>
-        </div>
+      <div className="waiting-list">
+      <h1>Connected Players:</h1>
+      <ul>
+        {players.map((player) => (
+          <li key={player._id}>{player.username}</li>
+        ))}
+      </ul>
+      </div>
     )
 
 }

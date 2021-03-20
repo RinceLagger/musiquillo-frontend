@@ -22,19 +22,20 @@ function GenericForm({ text,btnTxt,buttonEnable, submitAction }) {
 
   return (
     <div className="container">
-      <h1>{text}</h1>
+      
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="input">{text}</label>
+        {/* <label htmlFor="input">{text}</label> */}
         <input
           type="text"
           name="input"
           id="input"
+          placeholder={text}
           required
           value={formState.input}
           onChange={handleChange}
         />
 
-        <button type="submit" disabled={buttonEnable}>{btnTxt}</button>
+        <button className="primary" type="submit" disabled={buttonEnable}>{btnTxt}</button>
       </form>
     </div>
   );

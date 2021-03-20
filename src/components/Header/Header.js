@@ -11,7 +11,7 @@ const initialStyle = {
   backgroundSize: "cover",
   backgroundPosition: "center",
   borderRadius: "100%",
-  border: "3px solid #198FFD",
+  border: "1px solid white",
   
 }
 
