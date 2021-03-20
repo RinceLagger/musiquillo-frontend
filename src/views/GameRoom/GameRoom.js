@@ -148,12 +148,15 @@ export default function GameRoom() {
         <div className="play-container">
           {blob ? <AudioPlay  source={blob} /> : <h3>Waiting for the singer</h3>}
           </div>
+          <div className="container-guess">
           <GenericForm
             text={"Try to guess the song"}
             btnTxt={"Guess!"}
             buttonEnable={enable}
             submitAction={checkGuess}
           />
+          </div>
+          
         
       </>
     );

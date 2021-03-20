@@ -18,3 +18,8 @@
     font-size: 20px;
     
 }
+
+.container-guess {
+    position: absolute;
+    bottom:10%;
+}
