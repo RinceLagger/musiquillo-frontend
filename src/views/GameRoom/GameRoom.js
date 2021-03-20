@@ -8,9 +8,23 @@ import AudioRecord from "../../components/AudioRecord/AudioRecord";
 import AudioPlay from "../../components/AudioPlay/AudioPlay";
 import GenericForm from "../../components/GenericForm/GenericForm";
 import { useSongs } from "../../context/SongContext";
-import TimeBar from "../../components/TImeBar/TimeBar"
-import PlayersPoints from "../../components/PlayersPoints/PlayersPoints"
+import TimeBar from "../../components/TImeBar/TimeBar";
+import PlayersPoints from "../../components/PlayersPoints/PlayersPoints";
 import { useHistory } from "react-router-dom";
+import "./GameRoom.css"
+
+const initialSongStyle = {
+  position: "absolute",
+  top: "20%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "white",
+  border: "2px solid #198FFD",
+  borderRadius: "10px",
+  height: "50px",
+  width: "80%",
+};
 
 export default function GameRoom() {
   const { players, newPlayer } = usePlayers();
@@ -25,44 +39,54 @@ export default function GameRoom() {
   const [enable, setEnable] = React.useState(false);
   const [showTimeBar, setshowTimeBar] = React.useState(false);
   const [flipSong, setflipSong] = React.useState(false);
+  const [songStyle, setSongStyle] = React.useState(initialSongStyle);
+
   let history = useHistory();
 
-  const isSinger = ()=> {
-     return players[turn].username === user.username;
-    }
-  
+  const isSinger = () => {
+    return players[turn].username === user.username;
+  };
 
   const checkGuess = (guess) => {
-
-   
-    if(guess.toLowerCase()===songs[turn].name.toLowerCase()){ //ACIERTO!!!
+    if (guess.toLowerCase() === songs[turn].name.toLowerCase()) {
+      //ACIERTO!!!
       const username = user.username;
       setEnable(true); //no puedes escribir más ya que has acertado
       setflipSong(true); //muestra canción
+      const songStyle = { ...initialSongStyle, backgroundColor: "#4BFF3C" };
+      setSongStyle(songStyle);
+      setTimeout(() => {
+        setSongStyle(initialSongStyle);
+      }, 500);
       socket.emit("point", { username, roomId: code });
+    } else {
+      const songStyle = { ...initialSongStyle, backgroundColor: "#FF5353" };
+      setSongStyle(songStyle);
+      setTimeout(() => {
+        setSongStyle(initialSongStyle);
+      }, 300);
     }
-
   };
 
   const sendAudio = () => {
     socket.emit("newAudio", { blob, roomId: code });
-    console.log("emito blob", blob)
+    console.log("emito blob", blob);
     setShowSend(false);
   };
 
   if (socket) {
     socket.on("newAudio", ({ blob: newBlob }) => {
-      console.log(newBlob)
-      let blob = new Blob([newBlob], { type: "audio/ogg; codecs=opus" })
+      console.log(newBlob);
+      let blob = new Blob([newBlob], { type: "audio/ogg; codecs=opus" });
       const src = window.URL.createObjectURL(blob);
       setBlob(src);
       setshowTimeBar(true);
     });
     socket.on("timeOver", () => {
-      console.log("timeOver")
-      socket.off('newAudio');
-      socket.off('updatePoints');
-      socket.off('timeOver');
+      console.log("timeOver");
+      socket.off("newAudio");
+      socket.off("updatePoints");
+      socket.off("timeOver");
       history.push("/results-room");
     });
     socket.on("updatePoints", ({ players }) => {
@@ -73,34 +97,68 @@ export default function GameRoom() {
 
   if (isSinger()) {
     return (
-      <div>
-      <PlayersPoints classname = "ingame-points"/>
-       {showTimeBar && <TimeBar/>}
-        <h1>Record and Send!</h1>
-        {console.log(songs)}
-        <h2>Hum the song: { songs[turn].name}</h2>
-        <AudioRecord setSourcePlay={setSourcePlay} setBlob = {setBlob}/>
-
+      <>
+        {showTimeBar && <TimeBar />}
+        <PlayersPoints styleName={{ playersStyle: "ingame-points" }} />
+        <div style={songStyle}>
+          <h2
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              fontSize: "20px",
+            }}
+          >
+            <span>Hum the song:&nbsp;&nbsp; &nbsp;</span>
+            <span>{songs[turn].name}</span>
+          </h2>
+        </div>
         {sourcePlay && (
-          <div>
+          <div className="play-container">
             <AudioPlay source={sourcePlay} />
-            {showSend && <button onClick={sendAudio}>Send Audio!</button>}
-            
+            {showSend && <button className="primary" onClick={sendAudio}>Send!</button>}
           </div>
         )}
-      </div>
+
+        <AudioRecord setSourcePlay={setSourcePlay} setBlob={setBlob} />
+      </>
     );
   } else {
     return (
-      <div>
-      <PlayersPoints classname = "ingame-points"/>
-      {showTimeBar && <TimeBar/>}
-        <h1>pantalla listener</h1>
-        <h2>Guess the song: {!flipSong? <span>{songs[turn].hiddenName}</span> : <span>{songs[turn].name}</span> }</h2>
+      <>
+        {showTimeBar && <TimeBar />}
+        <PlayersPoints styleName={{ playersStyle: "ingame-points" }} />
 
-        {blob? <AudioPlay source={blob}/> : <h3>Waiting for the singer</h3>}
-        <GenericForm text= {"Try to guess the song"} btnTxt= {"Guess!"} buttonEnable = {enable} submitAction= {checkGuess}/>
-      </div>
+        <div style={songStyle}>
+          <h2
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              fontSize: "20px",
+            }}
+          >
+            <span>Guess the song:&nbsp;&nbsp;&nbsp; </span>
+
+            {!flipSong ? (
+              <span>{songs[turn].hiddenName}</span>
+            ) : (
+              <span>{songs[turn].name}</span>
+            )}
+          </h2>
+        </div>
+        <div className="play-container">
+          {blob ? <AudioPlay  source={blob} /> : <h3>Waiting for the singer</h3>}
+          </div>
+          <div className="container-guess">
+          <GenericForm
+            text={"Try to guess the song"}
+            btnTxt={"Guess!"}
+            buttonEnable={enable}
+            submitAction={checkGuess}
+          />
+          </div>
+          
+        
+      </>
     );
   }
 }

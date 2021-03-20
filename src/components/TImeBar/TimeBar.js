@@ -9,7 +9,7 @@ export default function TimeBar() {
 
   return (
     <div className = "progressContainer">
-      <div className="progress">Timer</div>
+      <div className="progress"></div>
     </div>
   );
 }

@@ -1,0 +1,30 @@
+.ingame-points{
+    display: flex;
+    width: 100%;
+    position:absolute;
+    top:30px;
+    justify-content: space-evenly;
+    background-color:#EFFCA1;
+    padding: 1px;
+    width: 97%;
+    border: 1px solid #6EB9FF;
+    flex-wrap: wrap;
+}
+
+.ingame-points li{
+    display: flex;
+    flex-direction: column;
+    width:30%;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #198FFD;
+    background-color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    max-width: 120px;
+}
+
+.waiting-list li{
+    margin: 15px;
+}

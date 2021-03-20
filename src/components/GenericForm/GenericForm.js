@@ -24,11 +24,12 @@ function GenericForm({ text,btnTxt,buttonEnable, submitAction }) {
     <div className="container">
       
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="input">{text}</label>
+        {/* <label htmlFor="input">{text}</label> */}
         <input
           type="text"
           name="input"
           id="input"
+          placeholder={text}
           required
           value={formState.input}
           onChange={handleChange}
