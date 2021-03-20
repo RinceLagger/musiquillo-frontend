@@ -1,0 +1,10 @@
+.record-container {
+  display: flex;
+  width: 200px;
+  background-color: #effca1;
+  justify-content: space-around;
+  border-radius: 10px;
+  height: 100px;
+  align-items: center;
+  border: 2px solid #6eb9ff;
+}

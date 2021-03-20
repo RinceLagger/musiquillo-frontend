@@ -52,14 +52,14 @@ export default function GameRoom() {
       const username = user.username;
       setEnable(true); //no puedes escribir más ya que has acertado
       setflipSong(true); //muestra canción
-      const songStyle = {...initialSongStyle, backgroundColor:"#4BFF3C"};
+      const songStyle = { ...initialSongStyle, backgroundColor: "#4BFF3C" };
       setSongStyle(songStyle);
       setTimeout(() => {
         setSongStyle(initialSongStyle);
       }, 500);
       socket.emit("point", { username, roomId: code });
-    }else{
-      const songStyle = {...initialSongStyle, backgroundColor:"#FF5353"};
+    } else {
+      const songStyle = { ...initialSongStyle, backgroundColor: "#FF5353" };
       setSongStyle(songStyle);
       setTimeout(() => {
         setSongStyle(initialSongStyle);
@@ -111,16 +111,14 @@ export default function GameRoom() {
             <span>{songs[turn].name}</span>
           </h2>
         </div>
-        <div>
-          <AudioRecord setSourcePlay={setSourcePlay} setBlob={setBlob} />
+        {sourcePlay && (
+          <div>
+            <AudioPlay source={sourcePlay} />
+            {showSend && <button onClick={sendAudio}>Send Audio!</button>}
+          </div>
+        )}
 
-          {sourcePlay && (
-            <div>
-              <AudioPlay source={sourcePlay} />
-              {showSend && <button onClick={sendAudio}>Send Audio!</button>}
-            </div>
-          )}
-        </div>
+        <AudioRecord setSourcePlay={setSourcePlay} setBlob={setBlob} />
       </>
     );
   } else {

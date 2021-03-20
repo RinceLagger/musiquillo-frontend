@@ -11,10 +11,10 @@ import { useAuth } from "../../context/AuthContext.utils";
 export default function ResultsRoom() {
 
     let history = useHistory();
-    const { socket, newRoom } = useSocket();
+    const { socket } = useSocket();
     const { turn, nextTurn } = useTurn();
-    const { code, defineCode } = useCode();
-    const { players, newPlayer } = usePlayers();
+    const { code} = useCode();
+    const { players } = usePlayers();
     const { user } = useAuth();
 
 
