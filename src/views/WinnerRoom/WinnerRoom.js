@@ -5,6 +5,15 @@ import { useTurn } from "../../context/TurnContext";
 import { useCode } from "../../context/CodeContext";
 import { useSongs } from "../../context/SongContext";
 import { useHistory } from "react-router-dom";
+import "./WinnerRoom.css"
+import styled, { keyframes } from 'styled-components';
+import { flip } from 'react-animations';
+
+const flipAnimation = keyframes`${flip}`;
+
+const FlipH1 = styled.h1`
+  animation: 3s ${flipAnimation};
+`;
 
 
 export default function WinnerRoom() {
@@ -52,7 +61,10 @@ export default function WinnerRoom() {
           }, 10000);
     },[])
 
-    return(<h1>El ganador es: {winner.winnerName}!!!!</h1>)
+    return(<div className ="winning-container"><h1>The Winner is: </h1>
+        <FlipH1 id="winner">{winner.winnerName}!!</FlipH1>
+    </div>
+    )
 
 
 }
