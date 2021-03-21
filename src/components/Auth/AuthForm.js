@@ -23,7 +23,7 @@ function AuthForm({ btnText, onSubmit, signUp }) {
   };
 
   return (
-    <form className="container-secondary" onSubmit={handleSubmit}>
+    <form className="container-form" onSubmit={handleSubmit}>
       <label htmlFor="username">username</label>
       <input
         type="text"

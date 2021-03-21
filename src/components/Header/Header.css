@@ -1,28 +1,54 @@
-.header{
-    position: absolute;
-    top:0;
-    left: 0;
-    height: 100px;
-    width: 100%;
-    background-color: #198FFD;
-    display: flex;
-    padding: 10px;
-    justify-content: space-between;
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120px;
+  width: 100%;
+  background-color: #198ffd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .userInfo {
+  display: flex;
+  flex-direction: column;
+  /* padding-right: 20px; */
+  justify-content: space-evenly;
+  color: white;
+  height: 80px;
+  margin-right: 10px;
+}
+.header .userImg {
+  margin-left: 10px;
+}
+
+.header button {
+  line-height: 8px;
+  padding: 0.7em;
+  min-width: 90px;
+}
+
+.header h1 {
+  display: none;
+}
+
+@media only screen and (min-width: 700px) {
+  .header .userImg {
+    margin-left: 100px;
+  }
+
+  .header .userInfo {
+    margin-right: 100px;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .header h1 {
+    display: block;
+    font-family: "Idmusic";
+    color: #fbff2a;
     
+    font-size: 50px;
+  }
 }
-
-.header .userInfo{
-    display: flex;
-    flex-direction: column;
-    padding-right: 20px;
-    justify-content: space-evenly;
-    color: white;
-}
-
-.header button{
-    line-height: 8px;
-    padding:0.7em;
-    min-width: 90px;
-}
-
-

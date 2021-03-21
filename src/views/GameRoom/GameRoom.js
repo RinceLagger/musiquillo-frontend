@@ -25,6 +25,7 @@ const initialSongStyle = {
   borderRadius: "10px",
   height: "50px",
   width: "80%",
+  maxWidth:"800px"
 };
 
 export default function GameRoom() {
@@ -102,7 +103,7 @@ export default function GameRoom() {
 
   if (isSinger()) {
     return (
-      <>
+      <div className="game-container">
         {showTimeBar && <TimeBar />}
         <PlayersPoints styleName={{ playersStyle: "ingame-points" }} />
         <div style={songStyle}>
@@ -130,11 +131,11 @@ export default function GameRoom() {
 
         <AudioRecord setSourcePlay={setSourcePlay} setBlob={setBlob} />
         <ChatBox/>
-      </>
+      </div>
     );
   } else {
     return (
-      <>
+      <div className="game-container">
         {showTimeBar && <TimeBar />}
         <PlayersPoints styleName={{ playersStyle: "ingame-points" }} />
 
@@ -167,7 +168,7 @@ export default function GameRoom() {
             submitAction={checkGuess}
           />
         </div>
-      </>
+      </div>
     );
   }
 }
