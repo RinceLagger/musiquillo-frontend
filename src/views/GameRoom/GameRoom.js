@@ -10,8 +10,9 @@ import GenericForm from "../../components/GenericForm/GenericForm";
 import { useSongs } from "../../context/SongContext";
 import TimeBar from "../../components/TImeBar/TimeBar";
 import PlayersPoints from "../../components/PlayersPoints/PlayersPoints";
+import ChatBox from "../../components/ChatBox/ChatBox";
 import { useHistory } from "react-router-dom";
-import "./GameRoom.css"
+import "./GameRoom.css";
 
 const initialSongStyle = {
   position: "absolute",
@@ -48,9 +49,10 @@ export default function GameRoom() {
   };
 
   const checkGuess = (guess) => {
+    const username = user.username;
     if (guess.toLowerCase() === songs[turn].name.toLowerCase()) {
       //ACIERTO!!!
-      const username = user.username;
+
       setEnable(true); //no puedes escribir más ya que has acertado
       setflipSong(true); //muestra canción
       const songStyle = { ...initialSongStyle, backgroundColor: "#4BFF3C" };
@@ -60,6 +62,8 @@ export default function GameRoom() {
       }, 500);
       socket.emit("point", { username, roomId: code });
     } else {
+      socket.emit("wrongGuess", { username, guess, roomId: code });
+
       const songStyle = { ...initialSongStyle, backgroundColor: "#FF5353" };
       setSongStyle(songStyle);
       setTimeout(() => {
@@ -87,11 +91,12 @@ export default function GameRoom() {
       socket.off("newAudio");
       socket.off("updatePoints");
       socket.off("timeOver");
+      socket.off("wrongGuess");
       history.push("/results-room");
     });
     socket.on("updatePoints", ({ players }) => {
       newPlayer(players);
-      console.log(players);
+      //console.log(players);
     });
   }
 
@@ -115,11 +120,16 @@ export default function GameRoom() {
         {sourcePlay && (
           <div className="play-container">
             <AudioPlay source={sourcePlay} />
-            {showSend && <button className="primary" onClick={sendAudio}>Send!</button>}
+            {showSend && (
+              <button className="primary" onClick={sendAudio}>
+                Send!
+              </button>
+            )}
           </div>
         )}
 
         <AudioRecord setSourcePlay={setSourcePlay} setBlob={setBlob} />
+        <ChatBox/>
       </>
     );
   } else {
@@ -146,18 +156,17 @@ export default function GameRoom() {
           </h2>
         </div>
         <div className="play-container">
-          {blob ? <AudioPlay  source={blob} /> : <h3>Waiting for the singer</h3>}
-          </div>
-          <div className="container-guess">
+          {blob ? <AudioPlay source={blob} /> : <h3>Waiting for the singer</h3>}
+        </div>
+        <ChatBox/>
+        <div className="container-guess">
           <GenericForm
             text={"Try to guess the song"}
             btnTxt={"Guess!"}
             buttonEnable={enable}
             submitAction={checkGuess}
           />
-          </div>
-          
-        
+        </div>
       </>
     );
   }
