@@ -29,3 +29,7 @@
 .waiting-list li{
     margin: 15px;
 }
+
+#turn{
+    border: 4px solid #fd1919;
+}
