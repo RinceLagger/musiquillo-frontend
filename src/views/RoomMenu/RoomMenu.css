@@ -1,0 +1,10 @@
+@media only screen and (min-width: 500px) {
+    .container-menu {
+      border-radius: 12px;
+      border: 4px rgba(29, 29, 27, 0.15) solid;
+      padding: 80px 80px 80px 80px;
+      background-color: rgb(239, 252, 161, 0.8);
+    }
+  
+   
+  }
