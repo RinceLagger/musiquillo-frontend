@@ -40,7 +40,7 @@ body {
 .container-secondary .title {
   font-family: "Idmusic";
   color: #fbff2a;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
   font-size: 70px;
   /* margin-bottom: 0.5em; */
   margin-bottom: 60px;
