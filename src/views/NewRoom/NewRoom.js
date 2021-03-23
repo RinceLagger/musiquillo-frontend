@@ -57,6 +57,12 @@ export default function NewRoom() {
     socket.emit("start", { username, roomId: code, numPlayers });
   };
 
+  const handleBack = (event) => {
+    
+    socket.emit("deleteRoom", { roomId: code });
+    history.push("/room-menu");
+  };
+
   React.useEffect(() => {
     const random = getRandom();
     defineCode(random);
@@ -73,6 +79,7 @@ export default function NewRoom() {
 
   return (
     <div className="waiting-container">
+    <button className="back" onClick={handleBack}>BACK</button>
       <p>
         COPY AND SHARE!</p>
         <div className="code">
