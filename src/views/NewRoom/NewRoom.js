@@ -67,7 +67,7 @@ export default function NewRoom() {
       const socket = socketIOClient(ENDPOINT);
       newRoom(socket);
       const username = user.username;
-      socket.emit("join", { username, roomId: code });
+      socket.emit("createRoom", { username, roomId: code });
     }
   }, [code]);
 
