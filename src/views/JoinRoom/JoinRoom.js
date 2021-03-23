@@ -9,6 +9,7 @@ import { useAuth } from "../../context/AuthContext.utils";
 import { useHistory } from "react-router-dom";
 
 import { useCode } from "../../context/CodeContext";
+import "./JoinRoom.css"
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
@@ -19,6 +20,7 @@ function JoinRoom() {
   const { newPlayer } = usePlayers();
 
   const { defineCode } = useCode();
+  const [showWrongCode, setShowWrongCode] = React.useState(false);
 
   if (socket) {
     socket.on("players", ({ players }) => {
@@ -30,7 +32,8 @@ function JoinRoom() {
     });
 
     socket.on("wrongCode", () => {
-      console.log("wrongCode");
+      setShowWrongCode(true);
+      setTimeout(()=>setShowWrongCode(false),1000)
     });
   }
 
@@ -50,6 +53,7 @@ function JoinRoom() {
         btnTxt={"Join Room"}
         submitAction={enterCode}
       />
+     {showWrongCode && <p id="wrong-code">Wrong Code, try it again!</p>}
     </div>
   );
 }

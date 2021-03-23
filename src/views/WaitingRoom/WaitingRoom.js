@@ -2,26 +2,40 @@ import React from "react";
 
 import { useSocket } from "../../context/SocketContext";
 import { usePlayers } from "../../context/PlayersContext";
-//import { useAuth } from "../../context/AuthContext.utils";
+import { useAuth } from "../../context/AuthContext.utils";
 import { useTurn } from "../../context/TurnContext";
 import { useHistory } from "react-router-dom";
 import { useSongs } from "../../context/SongContext";
+import { useCode } from "../../context/CodeContext";
 function WaitingRoom(){
 
     let history = useHistory();
     const {socket} = useSocket();
     const {players, newPlayer} = usePlayers();
     const { nextTurn  } = useTurn();
-    
+    const { code } = useCode();
     const { defineSongs  } = useSongs();
+    const { user } = useAuth();
+
+    const handleBack = (event) => {
+      const username = user.username;
+      socket.emit("deleteUser", { username,roomId: code });
+      history.push("/room-menu");
+    };
 
     if(socket){
         socket.on("players", ({players}) => {
             newPlayer(players);
             
           });
+
+        socket.on("deleteRoom", () => {
+          socket.off('players');
+          socket.off('start');
+          history.push("/room-menu");  
+          });  
         
-          socket.on("start", ({turn, songs}) => {
+        socket.on("start", ({turn, songs}) => {
             console.log("start");
             nextTurn(turn);
             defineSongs(songs);
@@ -36,6 +50,7 @@ function WaitingRoom(){
 
     return(
       <div className="waiting-list">
+      <button className="back" onClick={handleBack}>BACK</button>
       <h1>Connected Players:</h1>
       <ul>
         {players.map((player) => (

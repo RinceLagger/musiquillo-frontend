@@ -12,6 +12,7 @@ import TimeBar from "../../components/TImeBar/TimeBar";
 import PlayersPoints from "../../components/PlayersPoints/PlayersPoints";
 import ChatBox from "../../components/ChatBox/ChatBox";
 import { useHistory } from "react-router-dom";
+
 import "./GameRoom.css";
 
 const initialSongStyle = {
@@ -43,7 +44,11 @@ export default function GameRoom() {
   const [flipSong, setflipSong] = React.useState(false);
   const [songStyle, setSongStyle] = React.useState(initialSongStyle);
 
+  
+
   let history = useHistory();
+
+  
 
   const isSinger = () => {
     return players[turn].username === user.username;
@@ -75,20 +80,20 @@ export default function GameRoom() {
 
   const sendAudio = () => {
     socket.emit("newAudio", { blob, roomId: code });
-    console.log("emito blob", blob);
+    // console.log("emito blob", blob);
     setShowSend(false);
   };
 
   if (socket) {
     socket.on("newAudio", ({ blob: newBlob }) => {
-      console.log(newBlob);
+      // console.log(newBlob);
       let blob = new Blob([newBlob], { type: "audio/ogg; codecs=opus" });
       const src = window.URL.createObjectURL(blob);
       setBlob(src);
       setshowTimeBar(true);
     });
     socket.on("timeOver", () => {
-      console.log("timeOver");
+      // console.log("timeOver");
       socket.off("newAudio");
       socket.off("updatePoints");
       socket.off("timeOver");
