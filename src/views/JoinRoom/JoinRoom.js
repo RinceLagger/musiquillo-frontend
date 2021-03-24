@@ -45,9 +45,15 @@ function JoinRoom() {
     defineCode(codigo);
   };
 
+  const handleBack = (event) => {
+   
+    history.push("/room-menu");
+  };
+
   return (
     <div>
       <Header />
+      <button className="back" onClick={handleBack}></button>
       <GenericForm
         text={"Enter Room Code"}
         btnTxt={"Join Room"}
