@@ -48,9 +48,10 @@ function WaitingRoom(){
 
 
 
-    return(
+    return(<>
+    <button className="back back-top" onClick={handleBack}></button>
       <div className="waiting-list">
-      <button className="back" onClick={handleBack}>BACK</button>
+      
       <h1>Connected Players:</h1>
       <ul>
         {players.map((player) => (
@@ -58,6 +59,7 @@ function WaitingRoom(){
         ))}
       </ul>
       </div>
+      </>
     )
 
 }

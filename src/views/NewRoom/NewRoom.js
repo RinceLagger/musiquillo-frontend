@@ -77,9 +77,10 @@ export default function NewRoom() {
     }
   }, [code]);
 
-  return (
+  return (<>
+  <button className="back back-top" onClick={handleBack}></button>
     <div className="waiting-container">
-    <button className="back" onClick={handleBack}>BACK</button>
+    
       <p>
         COPY AND SHARE!</p>
         <div className="code">
@@ -103,5 +104,6 @@ export default function NewRoom() {
      
       {players.length > 1 && <button className="secondary" onClick={handleClick}>Start Game!</button>}
     </div>
+    </>
   );
 }
