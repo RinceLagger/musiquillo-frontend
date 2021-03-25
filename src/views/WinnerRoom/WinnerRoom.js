@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import "./WinnerRoom.css";
 import styled, { keyframes } from "styled-components";
 import { flip } from "react-animations";
+import podium from "../../assests/images/podium.png"
 
 const flipAnimation = keyframes`${flip}`;
 
@@ -62,8 +63,9 @@ export default function WinnerRoom() {
 
   return (
     <div className="winning-container">
-      <h1>The Winner is: </h1>
-      <FlipH1 id="winner">{winner.winnerName}!!</FlipH1>
+      {/* <h1>The Winner is: </h1> */}
+      <FlipH1 id="winner">{winner.winnerName}</FlipH1>
+      <img src={podium} alt="podium"/>
     </div>
   );
 }

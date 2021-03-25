@@ -1,7 +1,7 @@
 .winning-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     font-size: 40px;
     color: #198ffd;
@@ -9,5 +9,9 @@
 }
 
 #winner{
-    font-size: 60px;
+    font-size: 55px;
+}
+
+.winning-container img{
+    width:350px;
 }
