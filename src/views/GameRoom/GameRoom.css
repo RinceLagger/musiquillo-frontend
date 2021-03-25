@@ -38,3 +38,7 @@
     width: 1000px;
   }
 }
+
+.game-container .song{
+  white-space: pre;
+}

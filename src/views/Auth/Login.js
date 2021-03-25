@@ -5,13 +5,9 @@ import { useAuth } from "../../context/AuthContext.utils";
 import { Redirect } from "react-router-dom";
 
 function Login() {
-  
   const { user, handleLogin } = useAuth();
 
-
-  //console.log("en login",user);
   if (user.isLogged) {
-    console.log("redirect")
     return <Redirect to="/room-menu" />;
   }
 

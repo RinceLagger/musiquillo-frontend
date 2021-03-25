@@ -46,7 +46,8 @@ function JoinRoom() {
   };
 
   const handleBack = (event) => {
-   
+    socket.off("players");
+    socket.off("wrongCode");
     history.push("/room-menu");
   };
 

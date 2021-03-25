@@ -19,6 +19,7 @@ form label {
 
 form button {
   align-self: center;
+  margin-bottom: 20px;
 }
 
 @media only screen and (min-width: 500px) {
@@ -32,4 +33,13 @@ form button {
   form input {
     width: 250px;
   }
+}
+
+#wrong-data{
+  position: absolute;
+  top: 67%;
+  color:red;
+  font-size: small;
+  line-height: 20px;
+  
 }
