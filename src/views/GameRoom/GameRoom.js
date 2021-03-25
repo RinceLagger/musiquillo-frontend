@@ -104,6 +104,10 @@ export default function GameRoom() {
       newPlayer(players);
       //console.log(players);
     });
+    socket.on("disconnection", () => {
+      socket.disconnect(true);
+      history.push("/room-menu");
+    });
   }
 
   if (isSinger()) {
