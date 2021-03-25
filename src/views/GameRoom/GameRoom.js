@@ -104,6 +104,10 @@ export default function GameRoom() {
       newPlayer(players);
       //console.log(players);
     });
+    socket.on("disconnection", () => {
+      socket.disconnect(true);
+      history.push("/room-menu");
+    });
   }
 
   if (isSinger()) {
@@ -120,7 +124,7 @@ export default function GameRoom() {
             }}
           >
             <span>Hum the song:&nbsp;&nbsp; &nbsp;</span>
-            <span>{songs[turn].name}</span>
+            <span className="song">{songs[turn].name}</span>
           </h2>
         </div>
         {sourcePlay && (
@@ -155,9 +159,9 @@ export default function GameRoom() {
             <span>Guess the song:&nbsp;&nbsp;&nbsp; </span>
 
             {!flipSong ? (
-              <span>{songs[turn].hiddenName}</span>
+              <span className="song">{songs[turn].hiddenName}</span>
             ) : (
-              <span>{songs[turn].name}</span>
+              <span className="song">{songs[turn].name}</span>
             )}
           </h2>
         </div>

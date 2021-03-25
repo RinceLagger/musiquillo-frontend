@@ -8,7 +8,7 @@ function PlayersProvider({ children }) {
     const [players, setPlayers] = React.useState([]);
 
     const newPlayer = (players) =>{
-        console.log(players)
+        // console.log(players)
         setPlayers(players);
     }
 

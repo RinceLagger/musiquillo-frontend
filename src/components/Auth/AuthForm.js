@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./AuthForm.css";
+import { useAuth } from "../../context/AuthContext.utils";
 
 const initialState = {
   username: "",
@@ -10,6 +11,7 @@ const initialState = {
 
 function AuthForm({ btnText, onSubmit, signUp }) {
   const [state, setState] = React.useState(initialState);
+  const { error } = useAuth();
 
   const handleChange = ({ target }) => {
     setState({ ...state, [target.name]: target.value });
@@ -23,6 +25,7 @@ function AuthForm({ btnText, onSubmit, signUp }) {
   };
 
   return (
+    <>
     <form className="container-form" onSubmit={handleSubmit}>
       <label htmlFor="username">username</label>
       <input
@@ -57,7 +60,10 @@ function AuthForm({ btnText, onSubmit, signUp }) {
       />
 
       <button className="primary">{btnText}</button>
+      {error && <p id="wrong-data">Wrong data  <br/>Try it again!</p>}
     </form>
+    
+    </>
   );
 }
 

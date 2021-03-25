@@ -1,5 +1,6 @@
 import React from "react";
 import { login, logout, signup } from "../service/auth.service";
+
 import {
   getLocalUser,
   saveUser,
@@ -16,12 +17,23 @@ const initialState = {
 function AuthProvider({ children }) {
   const [state, setState] = React.useState(initialState);
 
+  const [error, setError] = React.useState(false);
+
+  const showError = () =>{
+    setError(true);
+    setTimeout(()=>setError(false), 2000);
+  }
+  
+
   const handleLogin = React.useCallback(async (user) => {
     try {
       const { data: loggedUser } = await login(user);
+      
       saveUser(loggedUser);
       setState({ user: { ...loggedUser, isLogged: true } });
     } catch (e) {
+      console.log(showError)
+      showError();
       console.error(e);
     }
   }, []);
@@ -32,6 +44,7 @@ function AuthProvider({ children }) {
       saveUser(loggedUser);
       setState({ user: { ...loggedUser, isLogged: true } });
     } catch (e) {
+      showError();
       console.error(e);
     }
   }, []);
@@ -48,7 +61,7 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user: state.user, handleLogin, handleLogout, handleSignup }}
+      value={{ user: state.user, handleLogin, handleLogout, handleSignup, error }}
     >
       {children}
     </AuthContext.Provider>

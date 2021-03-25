@@ -58,7 +58,9 @@ export default function NewRoom() {
   };
 
   const handleBack = (event) => {
-    
+    socket.off("players");
+    socket.off("start");
+    socket.off("duplicatedRoom");
     socket.emit("deleteRoom", { roomId: code });
     history.push("/room-menu");
   };
