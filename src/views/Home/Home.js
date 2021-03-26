@@ -20,7 +20,7 @@ function Home() {
         <Carousel/></div>
         
         <div>
-          <Link to="/signup"><button className = "primary">Sign In</button></Link>
+          <Link to="/signup"><button className = "primary">Sign Up</button></Link>
           <Link to="/login"><button className = "secondary">Log In</button></Link>
         </div>
       </FadeInDiv>

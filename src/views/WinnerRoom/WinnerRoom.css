@@ -10,8 +10,19 @@
 
 #winner{
     font-size: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .winning-container img{
     width:350px;
+}
+
+#winnerImg{
+ height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  margin-right: 10px;
 }

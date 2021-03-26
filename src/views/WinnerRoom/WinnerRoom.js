@@ -37,16 +37,19 @@ export default function WinnerRoom() {
   const findWinner = () => {
     let winnerName = players[0].username;
     let winnerPoints = players[0].points;
+    let winnerImg = players[0].imgUser;
     players.forEach((player) => {
       if (player.points > winnerPoints) {
         winnerName = player.username;
         winnerPoints = player.points;
+        winnerImg = player.imgUser;
       }
     });
 
     return {
       winnerName,
       winnerPoints,
+      winnerImg
     };
   };
 
@@ -63,8 +66,8 @@ export default function WinnerRoom() {
 
   return (
     <div className="winning-container">
-      {/* <h1>The Winner is: </h1> */}
-      <FlipH1 id="winner">{winner.winnerName}</FlipH1>
+      
+      <FlipH1 id="winner"><img id="winnerImg" src={winner.winnerImg} alt="img-winner"/>{winner.winnerName}</FlipH1>
       <img src={podium} alt="podium"/>
     </div>
   );

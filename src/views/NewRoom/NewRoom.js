@@ -74,8 +74,9 @@ export default function NewRoom() {
     if (code) {
       const socket = socketIOClient(ENDPOINT);
       newRoom(socket);
-      const username = user.username;
-      socket.emit("createRoom", { username, roomId: code });
+      const {username, imgUser} = user;
+      
+      socket.emit("createRoom", { username, roomId: code, img: imgUser});
     }
   }, [code]);
 
@@ -99,7 +100,11 @@ export default function NewRoom() {
       <h1>Connected Players:</h1>
       <ul>
         {players.map((player) => (
-          <li key={player._id}>{player.username}</li>
+          <li key={player._id}>
+          {console.log(player)}
+          <img id="avatar" src={player.imgUser} alt="user-img"/>
+          {player.username}
+          </li>
         ))}
       </ul>
       </div>

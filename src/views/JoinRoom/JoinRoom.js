@@ -40,14 +40,18 @@ function JoinRoom() {
   const enterCode = (codigo) => {
     const socket = socketIOClient(ENDPOINT);
     newRoom(socket);
-    const username = user.username;
-    socket.emit("join", { username, roomId: codigo });
+    const {username, imgUser} = user;
+    
+    socket.emit("join", { username, roomId: codigo, img: imgUser });
     defineCode(codigo);
   };
 
   const handleBack = (event) => {
-    socket.off("players");
-    socket.off("wrongCode");
+    if(socket){
+      socket.off("players");
+      socket.off("wrongCode");
+    }
+    
     history.push("/room-menu");
   };
 
