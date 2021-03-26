@@ -68,7 +68,7 @@ export default function NewRoom() {
   React.useEffect(() => {
     const random = getRandom();
     defineCode(random);
-  }, []);
+  }, [defineCode]);
 
   React.useEffect(() => {
     if (code) {
@@ -78,7 +78,7 @@ export default function NewRoom() {
       
       socket.emit("createRoom", { username, roomId: code, img: imgUser});
     }
-  }, [code]);
+  }, [code, newRoom, user]);
 
   return (<>
   <button className="back back-top" onClick={handleBack}></button>

@@ -7,9 +7,9 @@ const CodeContext = React.createContext({});
 function CodeProvider({ children }) {
     const [code, setCode] = React.useState("");
 
-    const defineCode = (code) =>{
+    const defineCode = React.useCallback((code) =>{
       setCode(code);
-    }
+    },[])
 
 
   return (

@@ -1,9 +1,7 @@
 import React from "react";
-import { useSocket } from "../../context/SocketContext";
+
 import { usePlayers } from "../../context/PlayersContext";
-import { useTurn } from "../../context/TurnContext";
-import { useCode } from "../../context/CodeContext";
-import { useSongs } from "../../context/SongContext";
+
 import { useHistory } from "react-router-dom";
 import "./WinnerRoom.css";
 import styled, { keyframes } from "styled-components";
@@ -18,7 +16,7 @@ const FlipH1 = styled.h1`
 
 export default function WinnerRoom() {
   let history = useHistory();
-  const { players, newPlayer } = usePlayers();
+  const { players } = usePlayers();
   const [winner, setWinner] = React.useState({});
   // const { socket,newRoom } = useSocket();
   // const { nextTurn } = useTurn();
@@ -34,7 +32,7 @@ export default function WinnerRoom() {
   //     defineSongs([]);
   // }
 
-  const findWinner = () => {
+  const findWinner = React.useCallback(() => {
     let winnerName = players[0].username;
     let winnerPoints = players[0].points;
     let winnerImg = players[0].imgUser;
@@ -51,7 +49,7 @@ export default function WinnerRoom() {
       winnerPoints,
       winnerImg
     };
-  };
+  }, [players]);
 
   React.useEffect(() => {
     const ganador = findWinner();
@@ -62,7 +60,7 @@ export default function WinnerRoom() {
     setTimeout(() => {
       history.push("/room-menu");
     }, 10000);
-  }, []);
+  }, [history, findWinner]);
 
   return (
     <div className="winning-container">
