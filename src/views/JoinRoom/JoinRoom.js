@@ -9,7 +9,7 @@ import { useAuth } from "../../context/AuthContext.utils";
 import { useHistory } from "react-router-dom";
 
 import { useCode } from "../../context/CodeContext";
-import "./JoinRoom.css"
+import "./JoinRoom.css";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
@@ -28,26 +28,29 @@ function JoinRoom() {
       socket.off("players");
       socket.off("wrongCode");
       history.push("/waiting-room");
-      //console.log(players);
     });
 
     socket.on("wrongCode", () => {
       setShowWrongCode(true);
-      setTimeout(()=>setShowWrongCode(false),1000)
+      setTimeout(() => setShowWrongCode(false), 1000);
     });
   }
 
   const enterCode = (codigo) => {
     const socket = socketIOClient(ENDPOINT);
     newRoom(socket);
-    const username = user.username;
-    socket.emit("join", { username, roomId: codigo });
+    const { username, imgUser } = user;
+
+    socket.emit("join", { username, roomId: codigo, img: imgUser });
     defineCode(codigo);
   };
 
   const handleBack = (event) => {
-    socket.off("players");
-    socket.off("wrongCode");
+    if (socket) {
+      socket.off("players");
+      socket.off("wrongCode");
+    }
+
     history.push("/room-menu");
   };
 
@@ -60,7 +63,7 @@ function JoinRoom() {
         btnTxt={"Join Room"}
         submitAction={enterCode}
       />
-     {showWrongCode && <p id="wrong-code">Wrong Code, try it again!</p>}
+      {showWrongCode && <p id="wrong-code">Wrong Code, try it again!</p>}
     </div>
   );
 }

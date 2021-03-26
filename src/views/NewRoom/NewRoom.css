@@ -34,7 +34,7 @@
     height: 50px;
     background-color: #6EB9FF;
     color: white;
-    border-color:white;
+    border: none;
 }
 
 .code button:hover {

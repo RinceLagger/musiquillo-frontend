@@ -1,19 +1,21 @@
-.chatBox{
-    position: absolute;
-    top: 59%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    background-color: white;
-    border-radius: 10px;
-    height: 220px;
-    width: 300px;
-    padding: 10px;
+.chatBox {
+  position: absolute;
+  top: 59%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 10px;
+  height: 220px;
+  width: 300px;
+  padding: 10px;
 }
 
-.chatBox div{
-    font-size: 20px;
-    color: chartreuse;
-    margin: 5px;
+.chatBox div {
+  font-size: 20px;
+  color: rgb(255, 15, 15);
+  margin: 5px;
 }
+
+

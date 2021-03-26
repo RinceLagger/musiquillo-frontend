@@ -11,7 +11,7 @@ export default function PlayersPoints({ styleName: { playersStyle } }) {
   return (
     <ul className={playersStyle}>
       {players.map((player, index) => {
-        if (turn === index && playersStyle==="ingame-points") {
+        if (turn === index && playersStyle === "ingame-points") {
           return (
             <li key={player._id} id="turn">
               <span>{player.username} </span>
@@ -21,6 +21,10 @@ export default function PlayersPoints({ styleName: { playersStyle } }) {
         } else {
           return (
             <li key={player._id}>
+              {playersStyle !== "ingame-points" && (
+                <img id="avatar" src={player.imgUser} alt="user-img" />
+              )}
+
               <span>{player.username} </span>
               <span>Points: {player.points}</span>
             </li>

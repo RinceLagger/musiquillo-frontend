@@ -55,7 +55,9 @@ function WaitingRoom(){
       <h1>Connected Players:</h1>
       <ul>
         {players.map((player) => (
-          <li key={player._id}>{player.username}</li>
+          <li key={player._id}>
+          <img id="avatar" src={player.imgUser} alt="user-img"/>
+          {player.username}</li>
         ))}
       </ul>
       </div>

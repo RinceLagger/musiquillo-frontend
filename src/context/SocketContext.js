@@ -7,9 +7,9 @@ const SocketContext = React.createContext({});
 function SocketProvider({ children }) {
     const [socket, setSocket] = React.useState(null);
 
-    const newRoom = (newsocket) =>{
+    const newRoom = React.useCallback((newsocket) =>{
         setSocket(newsocket);
-    }
+    }, [])
 
 
   return (

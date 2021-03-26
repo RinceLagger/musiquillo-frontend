@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthContext } from "./AuthContext";
-//import { getUser } from "../service/auth.service";
+
 
 export function useAuth() {
   return React.useContext(AuthContext);
@@ -35,12 +35,4 @@ export function removeUser() {
   sessionStorage.removeItem("user");
 }
 
-// export function useRefreshUser({ email, id }, onSuccess) {
-//   const { isLogged } = getLocalUser();
-//   React.useEffect(() => {
-//     const hasMissingInfo = !email || !id;
-//     if (isLogged && hasMissingInfo) {
-//       getUser().then(({ data: user }) => onSuccess(user));
-//     }
-//   }, [email, id, isLogged, onSuccess]);
-// }
+

@@ -26,7 +26,7 @@ const initialSongStyle = {
   borderRadius: "10px",
   height: "50px",
   width: "80%",
-  maxWidth:"800px"
+  maxWidth: "800px",
 };
 
 export default function GameRoom() {
@@ -44,11 +44,7 @@ export default function GameRoom() {
   const [flipSong, setflipSong] = React.useState(false);
   const [songStyle, setSongStyle] = React.useState(initialSongStyle);
 
-  
-
   let history = useHistory();
-
-  
 
   const isSinger = () => {
     return players[turn].username === user.username;
@@ -66,7 +62,8 @@ export default function GameRoom() {
       setTimeout(() => {
         setSongStyle(initialSongStyle);
       }, 500);
-      socket.emit("point", { username, roomId: code });
+
+      socket.emit("point", { username, roomId: code, turn });
     } else {
       socket.emit("wrongGuess", { username, guess, roomId: code });
 
@@ -80,20 +77,18 @@ export default function GameRoom() {
 
   const sendAudio = () => {
     socket.emit("newAudio", { blob, roomId: code });
-    // console.log("emito blob", blob);
+
     setShowSend(false);
   };
 
   if (socket) {
     socket.on("newAudio", ({ blob: newBlob }) => {
-      // console.log(newBlob);
       let blob = new Blob([newBlob], { type: "audio/ogg; codecs=opus" });
       const src = window.URL.createObjectURL(blob);
       setBlob(src);
       setshowTimeBar(true);
     });
     socket.on("timeOver", () => {
-      // console.log("timeOver");
       socket.off("newAudio");
       socket.off("updatePoints");
       socket.off("timeOver");
@@ -102,7 +97,6 @@ export default function GameRoom() {
     });
     socket.on("updatePoints", ({ players }) => {
       newPlayer(players);
-      //console.log(players);
     });
     socket.on("disconnection", () => {
       socket.disconnect(true);
@@ -139,7 +133,7 @@ export default function GameRoom() {
         )}
 
         <AudioRecord setSourcePlay={setSourcePlay} setBlob={setBlob} />
-        <ChatBox/>
+        <ChatBox />
       </div>
     );
   } else {
@@ -168,7 +162,7 @@ export default function GameRoom() {
         <div className="play-container">
           {blob ? <AudioPlay source={blob} /> : <h3>Waiting for the singer</h3>}
         </div>
-        <ChatBox/>
+        <ChatBox />
         <div className="container-guess">
           <GenericForm
             text={"Try to guess the song"}

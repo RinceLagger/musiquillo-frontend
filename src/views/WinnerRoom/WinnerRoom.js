@@ -1,13 +1,12 @@
 import React from "react";
-import { useSocket } from "../../context/SocketContext";
+
 import { usePlayers } from "../../context/PlayersContext";
-import { useTurn } from "../../context/TurnContext";
-import { useCode } from "../../context/CodeContext";
-import { useSongs } from "../../context/SongContext";
+
 import { useHistory } from "react-router-dom";
 import "./WinnerRoom.css";
 import styled, { keyframes } from "styled-components";
 import { flip } from "react-animations";
+import podium from "../../assests/images/podium.png";
 
 const flipAnimation = keyframes`${flip}`;
 
@@ -17,53 +16,44 @@ const FlipH1 = styled.h1`
 
 export default function WinnerRoom() {
   let history = useHistory();
-  const { players, newPlayer } = usePlayers();
+  const { players } = usePlayers();
   const [winner, setWinner] = React.useState({});
-  // const { socket,newRoom } = useSocket();
-  // const { nextTurn } = useTurn();
-  // const { defineCode } = useCode();
-  // const { defineSongs } = useSongs();
 
-  // const resetGameContext = ()=> {
-  //     //Reiniciamos contextos al finalizar el juego
-  //     newPlayer([]);
-  //     newRoom(null);
-  //     nextTurn(0);
-  //     defineCode("");
-  //     defineSongs([]);
-  // }
-
-  const findWinner = () => {
+  const findWinner = React.useCallback(() => {
     let winnerName = players[0].username;
     let winnerPoints = players[0].points;
+    let winnerImg = players[0].imgUser;
     players.forEach((player) => {
       if (player.points > winnerPoints) {
         winnerName = player.username;
         winnerPoints = player.points;
+        winnerImg = player.imgUser;
       }
     });
 
     return {
       winnerName,
       winnerPoints,
+      winnerImg,
     };
-  };
+  }, [players]);
 
   React.useEffect(() => {
     const ganador = findWinner();
     setWinner(ganador);
 
-    //resetGameContext();
-
     setTimeout(() => {
       history.push("/room-menu");
     }, 10000);
-  }, []);
+  }, [history, findWinner]);
 
   return (
     <div className="winning-container">
-      <h1>The Winner is: </h1>
-      <FlipH1 id="winner">{winner.winnerName}!!</FlipH1>
+      <FlipH1 id="winner">
+        <img id="winnerImg" src={winner.winnerImg} alt="img-winner" />
+        {winner.winnerName}
+      </FlipH1>
+      <img src={podium} alt="podium" />
     </div>
   );
 }

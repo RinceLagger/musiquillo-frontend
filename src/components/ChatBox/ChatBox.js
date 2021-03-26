@@ -1,6 +1,6 @@
 import React from "react";
 import { useSocket } from "../../context/SocketContext";
-import "./ChatBox.css"
+import "./ChatBox.css";
 
 export default function ChatBox() {
   const { socket } = useSocket();
@@ -20,12 +20,17 @@ export default function ChatBox() {
         newChat.shift();
       }
       setChatList(newChat);
-      // console.log(username);
-      // console.log(guess);
     });
   }
 
-  return (<div className="chatBox">
-    {chatList.map((message,index)=> <div key={index}><span>{message.username}:  </span><span>{message.guess}</span></div>)}
-  </div>)
+  return (
+    <div className="chatBox">
+      {chatList.map((message, index) => (
+        <div key={index}>
+          <span>{message.username}: </span>
+          <span>{message.guess}</span>
+        </div>
+      ))}
+    </div>
+  );
 }
