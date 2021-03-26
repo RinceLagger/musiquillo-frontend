@@ -37,9 +37,18 @@ form button {
 
 #wrong-data{
   position: absolute;
-  top: 67%;
+  bottom: 20%;
   color:red;
   font-size: small;
   line-height: 20px;
   
+}
+
+@media only screen and (min-width: 500px) {
+  #wrong-data{
+    
+    bottom: 27%;
+    
+    
+  }
 }

@@ -32,7 +32,7 @@ export default function NewRoom() {
   if (socket) {
     socket.on("players", ({ players }) => {
       newPlayer(players);
-      console.log(players);
+      
     });
 
     socket.on("duplicatedRoom", () => {
@@ -40,10 +40,10 @@ export default function NewRoom() {
     });
 
     socket.on("start", ({ turn, songs }) => {
-      console.log("start");
+      
       nextTurn(turn);
       defineSongs(songs);
-      console.log("turno: ", turn);
+      
       socket.off("players");
       socket.off("start");
       socket.off("duplicatedRoom");
@@ -101,7 +101,7 @@ export default function NewRoom() {
       <ul>
         {players.map((player) => (
           <li key={player._id}>
-          {console.log(player)}
+          
           <img id="avatar" src={player.imgUser} alt="user-img"/>
           {player.username}
           </li>

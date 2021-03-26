@@ -18,23 +18,23 @@ function AuthProvider({ children }) {
   const [state, setState] = React.useState(initialState);
 
   const [error, setError] = React.useState(false);
+  const [errorText, setErrorText] = React.useState("");
 
-  const showError = () =>{
+  const showError = (text) => {
     setError(true);
-    setTimeout(()=>setError(false), 2000);
-  }
-  
+    setTimeout(() => setError(false), 3000);
+  };
 
   const handleLogin = React.useCallback(async (user) => {
     try {
       const { data: loggedUser } = await login(user);
-      
+
       saveUser(loggedUser);
       setState({ user: { ...loggedUser, isLogged: true } });
     } catch (e) {
-      console.log(showError)
       showError();
-      console.error(e);
+      console.log(e.response.data);
+      setErrorText(e.response.data.message)
     }
   }, []);
 
@@ -45,7 +45,8 @@ function AuthProvider({ children }) {
       setState({ user: { ...loggedUser, isLogged: true } });
     } catch (e) {
       showError();
-      console.error(e);
+      console.log(e.response.data);
+      setErrorText(e.response.data.message)
     }
   }, []);
 
@@ -61,7 +62,14 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user: state.user, handleLogin, handleLogout, handleSignup, error }}
+      value={{
+        user: state.user,
+        handleLogin,
+        handleLogout,
+        handleSignup,
+        error,
+        errorText
+      }}
     >
       {children}
     </AuthContext.Provider>

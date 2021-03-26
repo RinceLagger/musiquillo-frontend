@@ -66,7 +66,8 @@ export default function GameRoom() {
       setTimeout(() => {
         setSongStyle(initialSongStyle);
       }, 500);
-      socket.emit("point", { username, roomId: code });
+      console.log(turn)
+      socket.emit("point", { username, roomId: code, turn });
     } else {
       socket.emit("wrongGuess", { username, guess, roomId: code });
 
