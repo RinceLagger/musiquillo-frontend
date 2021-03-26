@@ -13,7 +13,7 @@ import WaitingRoom from "./views/WaitingRoom/WaitingRoom";
 import GameRoom from "./views/GameRoom/GameRoom";
 import ResultsRoom from "./views/ResultsRoom/ResultsRoom";
 import WinnerRoom from "./views/WinnerRoom/WinnerRoom";
-//import SendAudio from './components/views/SendAudio';
+import PageNotFound from "./views/PageNotFound/PageNotFound";
 
 function App() {
   return (
@@ -30,6 +30,9 @@ function App() {
         <GameRoute exact path="/winner-room" component ={WinnerRoom}  />
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route >
+          <PageNotFound/>
         </Route>
       </Switch>
     </div>
