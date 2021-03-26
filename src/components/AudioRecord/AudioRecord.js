@@ -1,13 +1,15 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMicrophoneAlt, faStopCircle } from '@fortawesome/free-solid-svg-icons'
-import "./AudioRecord.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMicrophoneAlt,
+  faStopCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import "./AudioRecord.css";
 
-const microphoneImg = <FontAwesomeIcon icon={faMicrophoneAlt} size="2x"/>
-const stopIcon = <FontAwesomeIcon icon={faStopCircle} size="2x"/>
+const microphoneImg = <FontAwesomeIcon icon={faMicrophoneAlt} size="2x" />;
+const stopIcon = <FontAwesomeIcon icon={faStopCircle} size="2x" />;
 
 const startButtonStyle = {
-
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -62,11 +64,11 @@ export default function AudioRecord({ setSourcePlay, setBlob }) {
 
   const startRecord = () => {
     try {
-      const startStyle = {...startButton, backgroundColor:"#4BFF3C"};
+      const startStyle = { ...startButton, backgroundColor: "#4BFF3C" };
       setStartButton(startStyle);
       setStopButton(stopButtonStyle);
       mediaRecorder.start();
-      
+
       console.log(mediaRecorder.state);
     } catch (e) {
       console.error(e);
@@ -75,7 +77,7 @@ export default function AudioRecord({ setSourcePlay, setBlob }) {
 
   const stopRecord = () => {
     try {
-      const stopStyle = {...startButton, backgroundColor:"#FF5353"};
+      const stopStyle = { ...startButton, backgroundColor: "#FF5353" };
       setStopButton(stopStyle);
       setStartButton(startButtonStyle);
       mediaRecorder.stop();
@@ -90,7 +92,7 @@ export default function AudioRecord({ setSourcePlay, setBlob }) {
         {microphoneImg}
       </button>
       <button style={stopButton} onClick={stopRecord}>
-      {stopIcon}
+        {stopIcon}
       </button>
     </div>
   );

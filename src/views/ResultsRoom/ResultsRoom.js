@@ -15,15 +15,12 @@ export default function ResultsRoom() {
   const { players } = usePlayers();
   const { user } = useAuth();
 
-  
-
   const isSinger = () => {
     return players[turn].username === user.username;
   };
 
   if (socket) {
     socket.on("nextRound", ({ turno }) => {
-      // console.log(turno);
       nextTurn(turno);
       history.push("/game-room");
     });
@@ -33,7 +30,6 @@ export default function ResultsRoom() {
   }
 
   React.useEffect(() => {
-   
     if (isSinger()) {
       const numPlayers = players.length;
       socket.emit("nextRound", { roomId: code, numPlayers });
@@ -48,7 +44,6 @@ export default function ResultsRoom() {
           fontWeight: "800",
           fontSize: "20px",
           margin: "20px",
-          
         }}
       >
         Ranking :

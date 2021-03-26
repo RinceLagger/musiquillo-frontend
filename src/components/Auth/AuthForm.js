@@ -60,11 +60,7 @@ function AuthForm({ btnText, onSubmit, signUp }) {
         />
 
         <button className="primary">{btnText}</button>
-        {error && (
-          <p id="wrong-data">
-            {errorText}
-          </p>
-        )}
+        {error && <p id="wrong-data">{errorText}</p>}
       </form>
     </>
   );

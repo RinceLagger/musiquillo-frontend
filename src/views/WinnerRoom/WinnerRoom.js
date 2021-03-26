@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import "./WinnerRoom.css";
 import styled, { keyframes } from "styled-components";
 import { flip } from "react-animations";
-import podium from "../../assests/images/podium.png"
+import podium from "../../assests/images/podium.png";
 
 const flipAnimation = keyframes`${flip}`;
 
@@ -18,19 +18,6 @@ export default function WinnerRoom() {
   let history = useHistory();
   const { players } = usePlayers();
   const [winner, setWinner] = React.useState({});
-  // const { socket,newRoom } = useSocket();
-  // const { nextTurn } = useTurn();
-  // const { defineCode } = useCode();
-  // const { defineSongs } = useSongs();
-
-  // const resetGameContext = ()=> {
-  //     //Reiniciamos contextos al finalizar el juego
-  //     newPlayer([]);
-  //     newRoom(null);
-  //     nextTurn(0);
-  //     defineCode("");
-  //     defineSongs([]);
-  // }
 
   const findWinner = React.useCallback(() => {
     let winnerName = players[0].username;
@@ -47,15 +34,13 @@ export default function WinnerRoom() {
     return {
       winnerName,
       winnerPoints,
-      winnerImg
+      winnerImg,
     };
   }, [players]);
 
   React.useEffect(() => {
     const ganador = findWinner();
     setWinner(ganador);
-
-    //resetGameContext();
 
     setTimeout(() => {
       history.push("/room-menu");
@@ -64,9 +49,11 @@ export default function WinnerRoom() {
 
   return (
     <div className="winning-container">
-      
-      <FlipH1 id="winner"><img id="winnerImg" src={winner.winnerImg} alt="img-winner"/>{winner.winnerName}</FlipH1>
-      <img src={podium} alt="podium"/>
+      <FlipH1 id="winner">
+        <img id="winnerImg" src={winner.winnerImg} alt="img-winner" />
+        {winner.winnerName}
+      </FlipH1>
+      <img src={podium} alt="podium" />
     </div>
   );
 }

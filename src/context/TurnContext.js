@@ -2,15 +2,12 @@ import React from "react";
 
 const TurnContext = React.createContext({});
 
-
-
 function TurnProvider({ children }) {
-    const [turn, setTurn] = React.useState(0);
+  const [turn, setTurn] = React.useState(0);
 
-    const nextTurn = (turn) =>{
-      setTurn(turn);
-    }
-
+  const nextTurn = (turn) => {
+    setTurn(turn);
+  };
 
   return (
     <TurnContext.Provider value={{ turn, nextTurn }}>
@@ -22,5 +19,5 @@ function TurnProvider({ children }) {
 export default TurnProvider;
 
 export function useTurn() {
-    return React.useContext(TurnContext);
-  }
+  return React.useContext(TurnContext);
+}

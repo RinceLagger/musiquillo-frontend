@@ -4,9 +4,8 @@ import { useAuth } from "../context/AuthContext.utils";
 
 function AnonRoute({ component: Component, exact, path, ...props }) {
   const { user } = useAuth();
-  
+
   if (user.isLogged) {
-   // console.log("ya logueado")
     return <Redirect to="/room-menu" />;
   }
 

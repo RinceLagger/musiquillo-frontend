@@ -13,7 +13,7 @@
 .header .userInfo {
   display: flex;
   flex-direction: column;
-  /* padding-right: 20px; */
+
   justify-content: space-evenly;
   color: white;
   height: 80px;
@@ -27,7 +27,7 @@
   border-radius: 100%;
   border: "1px solid white";
 }
-.header .userImg img{
+.header .userImg img {
   height: 100px;
   width: 100px;
 }
@@ -57,7 +57,7 @@
     display: block;
     font-family: "Idmusic";
     color: #fbff2a;
-    
+
     font-size: 50px;
   }
 }

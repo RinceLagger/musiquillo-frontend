@@ -35,20 +35,16 @@ form button {
   }
 }
 
-#wrong-data{
+#wrong-data {
   position: absolute;
   bottom: 20%;
-  color:red;
+  color: red;
   font-size: small;
   line-height: 20px;
-  
 }
 
 @media only screen and (min-width: 500px) {
-  #wrong-data{
-    
+  #wrong-data {
     bottom: 27%;
-    
-    
   }
 }
