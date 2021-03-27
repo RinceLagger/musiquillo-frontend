@@ -5,3 +5,7 @@ export default function AudioPlay({ source }) {
     <audio src={source} id="play" className="audio-controls" controls></audio>
   );
 }
+
+AudioPlay.defaultProps ={
+  source:"",
+}

@@ -99,8 +99,8 @@ export default function GameRoom() {
       newPlayer(players);
     });
     socket.on("disconnection", () => {
-      socket.disconnect(true);
-      history.push("/room-menu");
+      // socket.disconnect(true);
+      history.push("/disconnect");
     });
   }
 
