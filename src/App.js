@@ -14,6 +14,7 @@ import GameRoom from "./views/GameRoom/GameRoom";
 import ResultsRoom from "./views/ResultsRoom/ResultsRoom";
 import WinnerRoom from "./views/WinnerRoom/WinnerRoom";
 import PageNotFound from "./views/PageNotFound/PageNotFound";
+import Disconnection from "./views/Disconnection/Disconnection";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <GameRoute exact path="/game-room" component ={GameRoom}  />
         <GameRoute exact path="/results-room" component ={ResultsRoom}  />
         <GameRoute exact path="/winner-room" component ={WinnerRoom}  />
+        <GameRoute exact path="/disconnect" component ={Disconnection}  />
         <Route exact path="/">
           <Home />
         </Route>
