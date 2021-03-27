@@ -11,6 +11,7 @@ import SocketProvider from "./context/SocketContext";
 import TurnProvider from "./context/TurnContext";
 import CodeProvider from "./context/CodeContext";
 import SongProvider from "./context/SongContext";
+import ErrorBoundery from "./components/ErrorBoundery/ErrorBoundery";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,7 +22,9 @@ ReactDOM.render(
             <CodeProvider>
               <TurnProvider>
                 <SongProvider>
-                  <App />
+                  <ErrorBoundery>
+                    <App />
+                  </ErrorBoundery>
                 </SongProvider>
               </TurnProvider>
             </CodeProvider>

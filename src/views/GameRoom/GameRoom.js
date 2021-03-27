@@ -160,7 +160,7 @@ export default function GameRoom() {
           </h2>
         </div>
         <div className="play-container">
-          {blob ? <AudioPlay source={blob} /> : <h3>Waiting for the singer</h3>}
+          {blob ? <AudioPlay source={blob} /> : <h3 id="waiting">Waiting for the singer <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></h3>}
         </div>
         <ChatBox />
         <div className="container-guess">
