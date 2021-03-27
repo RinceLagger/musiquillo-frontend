@@ -241,4 +241,7 @@ body {
     height: 50px;
     width: 50px;
   }
+  .back-top {
+    top: 2%;
+  }
 }
