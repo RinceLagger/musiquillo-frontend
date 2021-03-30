@@ -21,17 +21,34 @@ function JoinRoom() {
 
   const { defineCode } = useCode();
   const [showWrongCode, setShowWrongCode] = React.useState(false);
+  const [errorTextCode, setErrorTextCode] = React.useState("");
 
   if (socket) {
     socket.on("players", ({ players }) => {
       newPlayer(players);
       socket.off("players");
       socket.off("wrongCode");
+      socket.off("roomFull");
+      socket.off("duplicatedRoom");
       history.push("/waiting-room");
     });
 
     socket.on("wrongCode", () => {
+      setErrorTextCode("Wrong Code, try it again!");
       setShowWrongCode(true);
+      socket.disconnect(true);
+      setTimeout(() => setShowWrongCode(false), 1000);
+    });
+    socket.on("roomFull", () => {
+      setErrorTextCode("Max 6 players per Game");
+      setShowWrongCode(true);
+      socket.disconnect(true);
+      setTimeout(() => setShowWrongCode(false), 1000);
+    });
+    socket.on("duplicatedRoom", () => {
+      setErrorTextCode("Game already started");
+      setShowWrongCode(true);
+      socket.disconnect(true);
       setTimeout(() => setShowWrongCode(false), 1000);
     });
   }
@@ -63,7 +80,7 @@ function JoinRoom() {
         btnTxt={"Join Room"}
         submitAction={enterCode}
       />
-      {showWrongCode && <p id="wrong-code">Wrong Code, try it again!</p>}
+      {showWrongCode && <p id="wrong-code">{errorTextCode}</p>}
     </div>
   );
 }

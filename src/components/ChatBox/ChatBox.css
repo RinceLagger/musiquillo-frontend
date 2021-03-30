@@ -18,9 +18,14 @@
   margin: 5px;
 }
 
-@media only screen and (max-height: 700px) {
+@media only screen and (max-height: 800px) {
   .chatBox {
     top: 62%;
-    height: 150px;
+    height: 170px;
+  }
+  .chatBox div {
+    font-size: 15px;
+    color: rgb(255, 15, 15);
+    margin: 5px;
   }
 }
