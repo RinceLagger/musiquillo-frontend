@@ -29,10 +29,11 @@
   position: absolute;
   bottom: 1%;
 }
-.game-container #song{
+.game-container #song {
   white-space: pre;
   font-size: 18px;
 }
+
 
 @media only screen and (min-width: 1000px) {
   .game-container {
@@ -41,14 +42,12 @@
 
     width: 1000px;
   }
-  .game-container #song{
+  .game-container #song {
     font-size: 20px;
   }
 }
 
-
-
-#waiting{
+#waiting {
   display: flex;
   align-items: center;
 }
