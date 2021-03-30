@@ -17,7 +17,7 @@ import "./GameRoom.css";
 
 const initialSongStyle = {
   position: "absolute",
-  top: "20%",
+  top: "21%",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
