@@ -55,6 +55,8 @@ export default function AudioRecord({ setSourcePlay, setBlob }) {
   React.useEffect(() => {
     let constraints = { audio: true };
 
+    
+
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then(function (mediaStreamObj) {

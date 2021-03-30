@@ -117,8 +117,8 @@ export default function GameRoom() {
               fontSize: "20px",
             }}
           >
-            <span>Hum the song:&nbsp;&nbsp; &nbsp;</span>
-            <span className="song">{songs[turn].name}</span>
+            <span id="song">Hum the song:&nbsp;&nbsp; &nbsp;</span>
+            <span id="song">{songs[turn].name}</span>
           </h2>
         </div>
         {sourcePlay && (
@@ -150,12 +150,12 @@ export default function GameRoom() {
               fontSize: "20px",
             }}
           >
-            <span>Guess the song:&nbsp;&nbsp;&nbsp; </span>
+            <span id="song">Guess the song:&nbsp;&nbsp;&nbsp; </span>
 
             {!flipSong ? (
-              <span className="song">{songs[turn].hiddenName}</span>
+              <span id="song">{songs[turn].hiddenName}</span>
             ) : (
-              <span className="song">{songs[turn].name}</span>
+              <span id="song">{songs[turn].name}</span>
             )}
           </h2>
         </div>
