@@ -1,7 +1,7 @@
 import React from "react";
 import { useSocket } from "../../context/SocketContext";
 import { useAuth } from "../../context/AuthContext.utils";
-import { usePlayers } from "../../context/PlayersContext";
+//import { usePlayers } from "../../context/PlayersContext";
 import { useTurn } from "../../context/TurnContext";
 import { useCode } from "../../context/CodeContext";
 import AudioRecord from "../../components/AudioRecord/AudioRecord";
@@ -12,6 +12,10 @@ import TimeBar from "../../components/TImeBar/TimeBar";
 import PlayersPoints from "../../components/PlayersPoints/PlayersPoints";
 import ChatBox from "../../components/ChatBox/ChatBox";
 import { useHistory } from "react-router-dom";
+
+/****REDUX */
+import {usePlayersHandlers} from '../../store/reducers/playersReducer';
+import {useSelector} from 'react-redux';
 
 import "./GameRoom.css";
 
@@ -30,7 +34,10 @@ const initialSongStyle = {
 };
 
 export default function GameRoom() {
-  const { players, newPlayer } = usePlayers();
+  //const { players, newPlayer } = usePlayers();
+  const {updatePlayers} = usePlayersHandlers();
+  const {players} = useSelector((state)=> state.players);
+
   const { socket } = useSocket();
   const { user } = useAuth();
   const { turn } = useTurn();
@@ -96,7 +103,8 @@ export default function GameRoom() {
       history.push("/results-room");
     });
     socket.on("updatePoints", ({ players }) => {
-      newPlayer(players);
+      //newPlayer(players);
+      updatePlayers(players);
     });
     socket.on("disconnection", () => {
       // socket.disconnect(true);

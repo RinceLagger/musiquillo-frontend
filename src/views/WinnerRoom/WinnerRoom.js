@@ -1,12 +1,16 @@
 import React from "react";
 
-import { usePlayers } from "../../context/PlayersContext";
+//import { usePlayers } from "../../context/PlayersContext";
 
 import { useHistory } from "react-router-dom";
 import "./WinnerRoom.css";
 import styled, { keyframes } from "styled-components";
 import { flip } from "react-animations";
 import podium from "../../assests/images/podium.png";
+
+/****REDUX */
+
+import {useSelector} from 'react-redux';
 
 const flipAnimation = keyframes`${flip}`;
 
@@ -16,7 +20,9 @@ const FlipH1 = styled.h1`
 
 export default function WinnerRoom() {
   let history = useHistory();
-  const { players } = usePlayers();
+  //const { players } = usePlayers();
+  const {players} = useSelector((state)=> state.players);
+
   const [winner, setWinner] = React.useState({});
 
   const findWinner = React.useCallback(() => {

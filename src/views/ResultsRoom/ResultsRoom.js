@@ -4,15 +4,20 @@ import { useSocket } from "../../context/SocketContext";
 import { useTurn } from "../../context/TurnContext";
 import { useCode } from "../../context/CodeContext";
 import { useHistory } from "react-router-dom";
-import { usePlayers } from "../../context/PlayersContext";
+//import { usePlayers } from "../../context/PlayersContext";
 import { useAuth } from "../../context/AuthContext.utils";
+
+/****REDUX */
+
+import {useSelector} from 'react-redux';
 
 export default function ResultsRoom() {
   let history = useHistory();
   const { socket } = useSocket();
   const { turn, nextTurn } = useTurn();
   const { code } = useCode();
-  const { players } = usePlayers();
+  //const { players } = usePlayers();
+  const {players} = useSelector((state)=> state.players);
   const { user } = useAuth();
 
   const isSinger = () => {

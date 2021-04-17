@@ -12,25 +12,29 @@ import TurnProvider from "./context/TurnContext";
 import CodeProvider from "./context/CodeContext";
 import SongProvider from "./context/SongContext";
 import ErrorBoundery from "./components/ErrorBoundery/ErrorBoundery";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <AuthProvider>
-        <SocketProvider>
-          <PlayersProvider>
-            <CodeProvider>
-              <TurnProvider>
-                <SongProvider>
-                  <ErrorBoundery>
-                    <App />
-                  </ErrorBoundery>
-                </SongProvider>
-              </TurnProvider>
-            </CodeProvider>
-          </PlayersProvider>
-        </SocketProvider>
-      </AuthProvider>
+      <Provider store={store}>
+        <AuthProvider>
+          <SocketProvider>
+            <PlayersProvider>
+              <CodeProvider>
+                <TurnProvider>
+                  <SongProvider>
+                    <ErrorBoundery>
+                      <App />
+                    </ErrorBoundery>
+                  </SongProvider>
+                </TurnProvider>
+              </CodeProvider>
+            </PlayersProvider>
+          </SocketProvider>
+        </AuthProvider>
+      </Provider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

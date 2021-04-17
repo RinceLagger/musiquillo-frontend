@@ -2,7 +2,7 @@ import React from "react";
 import socketIOClient from "socket.io-client";
 import { useSocket } from "../../context/SocketContext";
 import { useAuth } from "../../context/AuthContext.utils";
-import { usePlayers } from "../../context/PlayersContext";
+//import { usePlayers } from "../../context/PlayersContext";
 import { useTurn } from "../../context/TurnContext";
 import { useHistory } from "react-router-dom";
 import { useCode } from "../../context/CodeContext";
@@ -10,6 +10,10 @@ import { useSongs } from "../../context/SongContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboard } from "@fortawesome/free-solid-svg-icons";
 import "./NewRoom.css";
+
+/****REDUX */
+import {usePlayersHandlers} from '../../store/reducers/playersReducer';
+import {useSelector} from 'react-redux';
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
@@ -20,17 +24,21 @@ function getRandom() {
 }
 
 export default function NewRoom() {
-  const { players, newPlayer } = usePlayers();
+  //const { players, newPlayer } = usePlayers();
   const { socket, newRoom } = useSocket();
   const { user } = useAuth();
   const { nextTurn } = useTurn();
   const { code, defineCode } = useCode();
   const { defineSongs } = useSongs();
 
+  const {updatePlayers} = usePlayersHandlers();
+  const {players} = useSelector((state)=> state.players);
+
   let history = useHistory();
   if (socket) {
     socket.on("players", ({ players }) => {
-      newPlayer(players);
+      //newPlayer(players);
+      updatePlayers(players);
     });
 
     socket.on("duplicatedRoom", () => {

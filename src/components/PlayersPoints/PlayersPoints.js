@@ -1,13 +1,18 @@
 import React from "react";
-import { usePlayers } from "../../context/PlayersContext";
+//import { usePlayers } from "../../context/PlayersContext";
 import "./PlayerPoints.css";
 import { useTurn } from "../../context/TurnContext";
+
+/****REDUX */
+
+import {useSelector} from 'react-redux';
 
 export default function PlayersPoints({ styleName: { playersStyle } }) {
   const { turn } = useTurn();
 
-  const { players } = usePlayers();
-
+  //const { players } = usePlayers();
+  const {players} = useSelector((state)=> state.players);
+  
   return (
     <ul className={playersStyle}>
       {players.map((player, index) => {

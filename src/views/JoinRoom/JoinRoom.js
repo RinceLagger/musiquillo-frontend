@@ -4,12 +4,16 @@ import Header from "../../components/Header/Header";
 import GenericForm from "../../components/GenericForm/GenericForm";
 import socketIOClient from "socket.io-client";
 import { useSocket } from "../../context/SocketContext";
-import { usePlayers } from "../../context/PlayersContext";
+//import { usePlayers } from "../../context/PlayersContext";
 import { useAuth } from "../../context/AuthContext.utils";
 import { useHistory } from "react-router-dom";
 
 import { useCode } from "../../context/CodeContext";
 import "./JoinRoom.css";
+
+/****REDUX */
+import {usePlayersHandlers} from '../../store/reducers/playersReducer';
+
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
@@ -17,7 +21,8 @@ function JoinRoom() {
   let history = useHistory();
   const { socket, newRoom } = useSocket();
   const { user } = useAuth();
-  const { newPlayer } = usePlayers();
+  //const { newPlayer } = usePlayers();
+  const {updatePlayers} = usePlayersHandlers();
 
   const { defineCode } = useCode();
   const [showWrongCode, setShowWrongCode] = React.useState(false);
@@ -25,7 +30,8 @@ function JoinRoom() {
 
   if (socket) {
     socket.on("players", ({ players }) => {
-      newPlayer(players);
+      //newPlayer(players);
+      updatePlayers(players);
       socket.off("players");
       socket.off("wrongCode");
       socket.off("roomFull");
